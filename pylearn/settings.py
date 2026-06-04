@@ -14,7 +14,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # ⚠️  En producción cambia esto a una clave secreta real y pon DEBUG=False
 SECRET_KEY = 'django-insecure-pylearn-dev-key-cambia-esto-en-produccion'
 DEBUG = True
-ALLOWED_HOSTS = ['*']   # En producción pon tu dominio: ['pylearn.com']
+ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = [
     'django.contrib.staticfiles',
