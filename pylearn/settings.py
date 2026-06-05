@@ -61,3 +61,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # ── Seguridad del ejecutor de código ──────────────────────────────────────────
 # Tiempo máximo (segundos) que puede correr el código del usuario
 CODE_TIMEOUT = 5
+import os
+PORT = os.environ.get('PORT', '8000')
