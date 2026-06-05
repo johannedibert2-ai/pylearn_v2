@@ -63,3 +63,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CODE_TIMEOUT = 5
 import os
 PORT = os.environ.get('PORT', '8000')
+CSRF_TRUSTED_ORIGINS = ['https://pylearnv2-production.up.railway.app']
