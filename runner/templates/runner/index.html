@@ -6,293 +6,293 @@
 <title>PyLearn — Aprende Python desde cero</title>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
- :root {
- --bg: #06060e;
- --surface: #0e0e1a;
- --card: #131320;
- --card-hover: #17172a;
- --border: #1e1e35;
- --border-light: #262640;
- --accent: #6c5ce7;
- --accent-bright: #a29bfe;
- --accent2: #fd79a8;
- --accent3: #00cec9;
- --accent4: #fdcb6e;
- --text: #eeedf8;
- --text-secondary: #9896b8;
- --text-muted: #4e4d6e;
- --code-bg: #09090f;
- --green: #00b894;
- --green-dim: rgba(0,184,148,.12);
- --red: #fd79a8;
- --red-dim: rgba(253,121,168,.1);
- --purple-dim: rgba(108,92,231,.12);
- --mono: 'JetBrains Mono', monospace;
- --sans: 'Outfit', sans-serif;
- --radius: 14px;
- --radius-lg: 20px;
- --shadow: 0 4px 40px rgba(0,0,0,.5);
- }
+  :root {
+    --bg: #06060e;
+    --surface: #0e0e1a;
+    --card: #131320;
+    --card-hover: #17172a;
+    --border: #1e1e35;
+    --border-light: #262640;
+    --accent: #6c5ce7;
+    --accent-bright: #a29bfe;
+    --accent2: #fd79a8;
+    --accent3: #00cec9;
+    --accent4: #fdcb6e;
+    --text: #eeedf8;
+    --text-secondary: #9896b8;
+    --text-muted: #4e4d6e;
+    --code-bg: #09090f;
+    --green: #00b894;
+    --green-dim: rgba(0,184,148,.12);
+    --red: #fd79a8;
+    --red-dim: rgba(253,121,168,.1);
+    --purple-dim: rgba(108,92,231,.12);
+    --mono: 'JetBrains Mono', monospace;
+    --sans: 'Outfit', sans-serif;
+    --radius: 14px;
+    --radius-lg: 20px;
+    --shadow: 0 4px 40px rgba(0,0,0,.5);
+  }
 
- *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
- html { scroll-behavior: smooth; }
- body {
- background: var(--bg);
- color: var(--text);
- font-family: var(--sans);
- min-height: 100vh;
- overflow-x: hidden;
- line-height: 1.6;
- }
- ::selection { background: var(--accent); color: #fff; }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    min-height: 100vh;
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+  ::selection { background: var(--accent); color: #fff; }
 
- .bg-grid {
- position: fixed; inset: 0; z-index: 0; pointer-events: none;
- background-image:
- linear-gradient(rgba(108,92,231,.035) 1px, transparent 1px),
- linear-gradient(90deg, rgba(108,92,231,.035) 1px, transparent 1px);
- background-size: 32px 32px;
- }
- .bg-blob { position: fixed; border-radius: 50%; filter: blur(100px); pointer-events: none; z-index: 0; }
- .bg-blob-1 { width: 700px; height: 700px; background: rgba(108,92,231,.18); top: -300px; left: -200px; }
- .bg-blob-2 { width: 500px; height: 500px; background: rgba(253,121,168,.1); bottom: -150px; right: -150px; }
- .bg-blob-3 { width: 350px; height: 350px; background: rgba(0,206,201,.08); top: 50%; left: 55%; }
+  .bg-grid {
+    position: fixed; inset: 0; z-index: 0; pointer-events: none;
+    background-image:
+      linear-gradient(rgba(108,92,231,.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(108,92,231,.035) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+  .bg-blob { position: fixed; border-radius: 50%; filter: blur(100px); pointer-events: none; z-index: 0; }
+  .bg-blob-1 { width: 700px; height: 700px; background: rgba(108,92,231,.18); top: -300px; left: -200px; }
+  .bg-blob-2 { width: 500px; height: 500px; background: rgba(253,121,168,.1); bottom: -150px; right: -150px; }
+  .bg-blob-3 { width: 350px; height: 350px; background: rgba(0,206,201,.08); top: 50%; left: 55%; }
 
- .page-wrap { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; padding: 0 24px 100px; }
+  .page-wrap { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; padding: 0 24px 100px; }
 
- .hero { padding: 80px 0 60px; text-align: center; animation: fadeUp .7s ease both; }
- .hero-badge {
- display: inline-flex; align-items: center; gap: 8px;
- background: var(--purple-dim);
- border: 1px solid rgba(108,92,231,.3);
- padding: 6px 16px; border-radius: 50px;
- font-size: 11px; font-weight: 600; letter-spacing: 2px;
- text-transform: uppercase; color: var(--accent-bright);
- margin-bottom: 28px;
- }
- .hero-badge .ping { width: 7px; height: 7px; background: var(--green); border-radius: 50%; animation: ping 2s ease infinite; }
- h1 { font-size: clamp(42px, 8vw, 88px); font-weight: 800; line-height: 1; letter-spacing: -3px; margin-bottom: 20px; }
- h1 .py { color: var(--accent-bright); }
- h1 .learn { color: var(--text); }
- .hero-desc { font-size: clamp(15px, 2.2vw, 18px); color: var(--text-secondary); max-width: 520px; margin: 0 auto 36px; font-weight: 300; line-height: 1.7; }
- .hero-stats { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-bottom: 44px; }
- .stat { text-align: center; }
- .stat-num { font-size: 28px; font-weight: 800; color: var(--accent-bright); }
- .stat-label { font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+  .hero { padding: 80px 0 60px; text-align: center; animation: fadeUp .7s ease both; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--purple-dim);
+    border: 1px solid rgba(108,92,231,.3);
+    padding: 6px 16px; border-radius: 50px;
+    font-size: 11px; font-weight: 600; letter-spacing: 2px;
+    text-transform: uppercase; color: var(--accent-bright);
+    margin-bottom: 28px;
+  }
+  .hero-badge .ping { width: 7px; height: 7px; background: var(--green); border-radius: 50%; animation: ping 2s ease infinite; }
+  h1 { font-size: clamp(42px, 8vw, 88px); font-weight: 800; line-height: 1; letter-spacing: -3px; margin-bottom: 20px; }
+  h1 .py { color: var(--accent-bright); }
+  h1 .learn { color: var(--text); }
+  .hero-desc { font-size: clamp(15px, 2.2vw, 18px); color: var(--text-secondary); max-width: 520px; margin: 0 auto 36px; font-weight: 300; line-height: 1.7; }
+  .hero-stats { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-bottom: 44px; }
+  .stat { text-align: center; }
+  .stat-num { font-size: 28px; font-weight: 800; color: var(--accent-bright); }
+  .stat-label { font-size: 12px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
 
- .progress-wrap { max-width: 380px; margin: 0 auto; }
- .progress-meta { display: flex; justify-content: space-between; font-size: 11px; color: var(--text-muted); font-family: var(--mono); margin-bottom: 8px; }
- .progress-track { height: 5px; background: var(--border); border-radius: 3px; overflow: hidden; }
- .progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent2)); border-radius: 3px; width: 0; transition: width 0.8s cubic-bezier(.4,0,.2,1); }
+  .progress-wrap { max-width: 380px; margin: 0 auto; }
+  .progress-meta { display: flex; justify-content: space-between; font-size: 11px; color: var(--text-muted); font-family: var(--mono); margin-bottom: 8px; }
+  .progress-track { height: 5px; background: var(--border); border-radius: 3px; overflow: hidden; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent2)); border-radius: 3px; width: 0; transition: width 0.8s cubic-bezier(.4,0,.2,1); }
 
- nav {
- position: sticky; top: 0; z-index: 200;
- background: rgba(6,6,14,.88);
- backdrop-filter: blur(24px) saturate(1.4);
- border-bottom: 1px solid var(--border);
- padding: 0; display: flex; gap: 2px;
- overflow-x: auto; scrollbar-width: none;
- }
- nav::-webkit-scrollbar { display: none; }
- .tab {
- padding: 17px 22px; font-size: 13px; font-weight: 600;
- color: var(--text-muted); cursor: pointer;
- border: none; background: none; font-family: var(--sans); letter-spacing: .3px;
- position: relative; white-space: nowrap; transition: color .2s; flex-shrink: 0;
- }
- .tab::after {
- content: ''; position: absolute; bottom: 0; left: 8px; right: 8px;
- height: 2px; background: linear-gradient(90deg, var(--accent), var(--accent2));
- border-radius: 2px 2px 0 0; transform: scaleX(0); transition: transform .25s ease;
- }
- .tab:hover { color: var(--text-secondary); }
- .tab.active { color: var(--accent-bright); }
- .tab.active::after { transform: scaleX(1); }
+  nav {
+    position: sticky; top: 0; z-index: 200;
+    background: rgba(6,6,14,.88);
+    backdrop-filter: blur(24px) saturate(1.4);
+    border-bottom: 1px solid var(--border);
+    padding: 0; display: flex; gap: 2px;
+    overflow-x: auto; scrollbar-width: none;
+  }
+  nav::-webkit-scrollbar { display: none; }
+  .tab {
+    padding: 17px 22px; font-size: 13px; font-weight: 600;
+    color: var(--text-muted); cursor: pointer;
+    border: none; background: none; font-family: var(--sans); letter-spacing: .3px;
+    position: relative; white-space: nowrap; transition: color .2s; flex-shrink: 0;
+  }
+  .tab::after {
+    content: ''; position: absolute; bottom: 0; left: 8px; right: 8px;
+    height: 2px; background: linear-gradient(90deg, var(--accent), var(--accent2));
+    border-radius: 2px 2px 0 0; transform: scaleX(0); transition: transform .25s ease;
+  }
+  .tab:hover { color: var(--text-secondary); }
+  .tab.active { color: var(--accent-bright); }
+  .tab.active::after { transform: scaleX(1); }
 
- .section { display: none; padding-top: 52px; }
- .section.active { display: block; animation: fadeUp .4s ease both; }
+  .section { display: none; padding-top: 52px; }
+  .section.active { display: block; animation: fadeUp .4s ease both; }
 
- .module-tag {
- display: inline-block; font-family: var(--mono); font-size: 10px; font-weight: 600;
- color: var(--accent); background: var(--purple-dim);
- border: 1px solid rgba(108,92,231,.25);
- padding: 4px 12px; border-radius: 50px; letter-spacing: 1.5px;
- text-transform: uppercase; margin-bottom: 16px;
- }
- .section-h2 { font-size: clamp(28px, 5vw, 48px); font-weight: 800; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 18px; color: var(--text); }
- .section-lead { font-size: 16px; color: var(--text-secondary); max-width: 620px; line-height: 1.75; margin-bottom: 40px; font-weight: 300; }
- .section-lead .hl { color: var(--accent-bright); background: var(--purple-dim); padding: 1px 6px; border-radius: 5px; font-family: var(--mono); font-size: 14px; font-weight: 600; }
+  .module-tag {
+    display: inline-block; font-family: var(--mono); font-size: 10px; font-weight: 600;
+    color: var(--accent); background: var(--purple-dim);
+    border: 1px solid rgba(108,92,231,.25);
+    padding: 4px 12px; border-radius: 50px; letter-spacing: 1.5px;
+    text-transform: uppercase; margin-bottom: 16px;
+  }
+  .section-h2 { font-size: clamp(28px, 5vw, 48px); font-weight: 800; letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 18px; color: var(--text); }
+  .section-lead { font-size: 16px; color: var(--text-secondary); max-width: 620px; line-height: 1.75; margin-bottom: 40px; font-weight: 300; }
+  .section-lead .hl { color: var(--accent-bright); background: var(--purple-dim); padding: 1px 6px; border-radius: 5px; font-family: var(--mono); font-size: 14px; font-weight: 600; }
 
- .info-grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); margin: 32px 0; }
- .info-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; transition: border-color .2s, transform .2s; }
- .info-card:hover { border-color: var(--border-light); transform: translateY(-2px); }
- .info-card-icon { font-size: 22px; margin-bottom: 12px; }
- .info-card-title { font-size: 14px; font-weight: 700; margin-bottom: 7px; color: var(--text); }
- .info-card-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+  .info-grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); margin: 32px 0; }
+  .info-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; transition: border-color .2s, transform .2s; }
+  .info-card:hover { border-color: var(--border-light); transform: translateY(-2px); }
+  .info-card-icon { font-size: 22px; margin-bottom: 12px; }
+  .info-card-title { font-size: 14px; font-weight: 700; margin-bottom: 7px; color: var(--text); }
+  .info-card-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
 
- .concept-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); margin: 24px 0; overflow: hidden; transition: border-color .2s; }
- .concept-card:hover { border-color: var(--border-light); }
- .concept-header { padding: 20px 24px 0; display: flex; align-items: flex-start; gap: 16px; }
- .concept-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
- .ci-purple { background: rgba(108,92,231,.18); }
- .ci-pink { background: rgba(253,121,168,.15); }
- .ci-green { background: rgba(0,184,148,.15); }
- .ci-yellow { background: rgba(253,203,110,.15); }
- .ci-cyan { background: rgba(0,206,201,.15); }
- .concept-meta { flex: 1; }
- .concept-title { font-size: 16px; font-weight: 700; margin-bottom: 3px; }
- .concept-sub { font-size: 12px; color: var(--text-muted); font-family: var(--mono); }
+  .concept-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); margin: 24px 0; overflow: hidden; transition: border-color .2s; }
+  .concept-card:hover { border-color: var(--border-light); }
+  .concept-header { padding: 20px 24px 0; display: flex; align-items: flex-start; gap: 16px; }
+  .concept-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+  .ci-purple { background: rgba(108,92,231,.18); }
+  .ci-pink   { background: rgba(253,121,168,.15); }
+  .ci-green  { background: rgba(0,184,148,.15); }
+  .ci-yellow { background: rgba(253,203,110,.15); }
+  .ci-cyan   { background: rgba(0,206,201,.15); }
+  .concept-meta { flex: 1; }
+  .concept-title { font-size: 16px; font-weight: 700; margin-bottom: 3px; }
+  .concept-sub { font-size: 12px; color: var(--text-muted); font-family: var(--mono); }
 
- .playground { margin: 18px 0 0; border-top: 1px solid var(--border); }
- .play-toolbar { display: flex; align-items: center; justify-content: space-between; padding: 10px 16px; background: var(--surface); }
- .dots { display: flex; gap: 6px; }
- .dot { width: 11px; height: 11px; border-radius: 50%; }
- .dot-r { background: #ff5f57; }
- .dot-y { background: #febc2e; }
- .dot-g { background: #28c840; }
- .toolbar-right { display: flex; align-items: center; gap: 10px; }
- .lang-tag { font-size: 10px; font-weight: 700; color: var(--accent-bright); background: var(--purple-dim); padding: 3px 10px; border-radius: 50px; letter-spacing: 1px; font-family: var(--mono); text-transform: uppercase; }
- .run-btn { display: flex; align-items: center; gap: 7px; background: var(--accent); color: #fff; border: none; border-radius: 8px; padding: 7px 16px; font-size: 12px; font-weight: 700; cursor: pointer; font-family: var(--sans); letter-spacing: .5px; transition: background .15s, transform .1s, opacity .15s; }
- .run-btn:hover { background: #7d6ef0; }
- .run-btn:active { transform: scale(.97); }
- .run-btn.loading { opacity: .7; pointer-events: none; }
- .code-area { width: 100%; padding: 18px 20px; background: var(--code-bg); color: #c3d0e5; border: none; resize: vertical; outline: none; font-family: var(--mono); font-size: 13px; line-height: 1.8; tab-size: 4; min-height: 100px; }
- .output-area { display: none; border-top: 1px solid var(--border); background: var(--code-bg); padding: 14px 20px; }
- .output-area.show { display: block; }
- .output-label { font-size: 10px; font-weight: 700; color: var(--text-muted); font-family: var(--mono); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 10px; }
- .output-text { font-family: var(--mono); font-size: 13px; color: var(--green); white-space: pre-wrap; line-height: 1.7; }
- .output-text.error { color: var(--red); }
+  .playground { margin: 18px 0 0; border-top: 1px solid var(--border); }
+  .play-toolbar { display: flex; align-items: center; justify-content: space-between; padding: 10px 16px; background: var(--surface); }
+  .dots { display: flex; gap: 6px; }
+  .dot { width: 11px; height: 11px; border-radius: 50%; }
+  .dot-r { background: #ff5f57; }
+  .dot-y { background: #febc2e; }
+  .dot-g { background: #28c840; }
+  .toolbar-right { display: flex; align-items: center; gap: 10px; }
+  .lang-tag { font-size: 10px; font-weight: 700; color: var(--accent-bright); background: var(--purple-dim); padding: 3px 10px; border-radius: 50px; letter-spacing: 1px; font-family: var(--mono); text-transform: uppercase; }
+  .run-btn { display: flex; align-items: center; gap: 7px; background: var(--accent); color: #fff; border: none; border-radius: 8px; padding: 7px 16px; font-size: 12px; font-weight: 700; cursor: pointer; font-family: var(--sans); letter-spacing: .5px; transition: background .15s, transform .1s, opacity .15s; }
+  .run-btn:hover { background: #7d6ef0; }
+  .run-btn:active { transform: scale(.97); }
+  .run-btn.loading { opacity: .7; pointer-events: none; }
+  .code-area { width: 100%; padding: 18px 20px; background: var(--code-bg); color: #c3d0e5; border: none; resize: vertical; outline: none; font-family: var(--mono); font-size: 13px; line-height: 1.8; tab-size: 4; min-height: 100px; }
+  .output-area { display: none; border-top: 1px solid var(--border); background: var(--code-bg); padding: 14px 20px; }
+  .output-area.show { display: block; }
+  .output-label { font-size: 10px; font-weight: 700; color: var(--text-muted); font-family: var(--mono); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 10px; }
+  .output-text { font-family: var(--mono); font-size: 13px; color: var(--green); white-space: pre-wrap; line-height: 1.7; }
+  .output-text.error { color: var(--red); }
 
- .explain-block { display: flex; align-items: flex-start; gap: 16px; background: rgba(108,92,231,.06); border-left: 3px solid var(--accent); border-radius: 0 12px 12px 0; padding: 18px 20px; margin: 20px 0; }
- .explain-block .emoji { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
- .explain-block p { font-size: 14px; color: var(--text-secondary); line-height: 1.7; }
- .explain-block strong { color: var(--accent-bright); font-weight: 700; }
+  .explain-block { display: flex; align-items: flex-start; gap: 16px; background: rgba(108,92,231,.06); border-left: 3px solid var(--accent); border-radius: 0 12px 12px 0; padding: 18px 20px; margin: 20px 0; }
+  .explain-block .emoji { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+  .explain-block p { font-size: 14px; color: var(--text-secondary); line-height: 1.7; }
+  .explain-block strong { color: var(--accent-bright); font-weight: 700; }
 
- .quiz-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 26px; margin: 28px 0; }
- .quiz-badge { display: inline-block; font-size: 10px; font-weight: 700; color: var(--accent4); background: rgba(253,203,110,.12); border: 1px solid rgba(253,203,110,.25); padding: 3px 12px; border-radius: 50px; letter-spacing: 1.5px; text-transform: uppercase; font-family: var(--mono); margin-bottom: 16px; }
- .quiz-q { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 20px; line-height: 1.6; }
- .quiz-opts { display: grid; gap: 10px; grid-template-columns: 1fr 1fr; }
- @media (max-width: 520px) { .quiz-opts { grid-template-columns: 1fr; } }
- .quiz-opt { display: flex; align-items: center; gap: 12px; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 13px 16px; cursor: pointer; transition: border-color .15s, background .15s; }
- .quiz-opt:hover { border-color: var(--accent); background: var(--purple-dim); }
- .quiz-letter { width: 26px; height: 26px; border-radius: 8px; background: var(--border); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; color: var(--text-muted); font-family: var(--mono); flex-shrink: 0; }
- .quiz-opt span { font-size: 13px; font-weight: 500; color: var(--text-secondary); }
- .quiz-opt.correct { border-color: var(--green); background: var(--green-dim); }
- .quiz-opt.correct .quiz-letter { background: var(--green); color: #000; }
- .quiz-opt.wrong { border-color: var(--red); background: var(--red-dim); }
- .quiz-opt.wrong .quiz-letter { background: var(--red); color: #fff; }
- .quiz-fb { display: none; margin-top: 14px; padding: 12px 16px; border-radius: 10px; font-size: 13px; font-weight: 600; }
- .quiz-fb.show { display: block; }
- .quiz-fb.ok { background: var(--green-dim); border: 1px solid rgba(0,184,148,.3); color: var(--green); }
- .quiz-fb.fail { background: var(--red-dim); border: 1px solid rgba(253,121,168,.25); color: var(--red); }
+  .quiz-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 26px; margin: 28px 0; }
+  .quiz-badge { display: inline-block; font-size: 10px; font-weight: 700; color: var(--accent4); background: rgba(253,203,110,.12); border: 1px solid rgba(253,203,110,.25); padding: 3px 12px; border-radius: 50px; letter-spacing: 1.5px; text-transform: uppercase; font-family: var(--mono); margin-bottom: 16px; }
+  .quiz-q { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 20px; line-height: 1.6; }
+  .quiz-opts { display: grid; gap: 10px; grid-template-columns: 1fr 1fr; }
+  @media (max-width: 520px) { .quiz-opts { grid-template-columns: 1fr; } }
+  .quiz-opt { display: flex; align-items: center; gap: 12px; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 13px 16px; cursor: pointer; transition: border-color .15s, background .15s; }
+  .quiz-opt:hover { border-color: var(--accent); background: var(--purple-dim); }
+  .quiz-letter { width: 26px; height: 26px; border-radius: 8px; background: var(--border); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; color: var(--text-muted); font-family: var(--mono); flex-shrink: 0; }
+  .quiz-opt span { font-size: 13px; font-weight: 500; color: var(--text-secondary); }
+  .quiz-opt.correct { border-color: var(--green); background: var(--green-dim); }
+  .quiz-opt.correct .quiz-letter { background: var(--green); color: #000; }
+  .quiz-opt.wrong { border-color: var(--red); background: var(--red-dim); }
+  .quiz-opt.wrong .quiz-letter { background: var(--red); color: #fff; }
+  .quiz-fb { display: none; margin-top: 14px; padding: 12px 16px; border-radius: 10px; font-size: 13px; font-weight: 600; }
+  .quiz-fb.show { display: block; }
+  .quiz-fb.ok { background: var(--green-dim); border: 1px solid rgba(0,184,148,.3); color: var(--green); }
+  .quiz-fb.fail { background: var(--red-dim); border: 1px solid rgba(253,121,168,.25); color: var(--red); }
 
- .divider { height: 1px; background: var(--border); margin: 40px 0; }
+  .divider { height: 1px; background: var(--border); margin: 40px 0; }
 
- code, .ic { font-family: var(--mono); font-size: 13px; background: rgba(108,92,231,.15); color: var(--accent-bright); padding: 2px 7px; border-radius: 5px; }
+  code, .ic { font-family: var(--mono); font-size: 13px; background: rgba(108,92,231,.15); color: var(--accent-bright); padding: 2px 7px; border-radius: 5px; }
 
- .var-vis { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; margin: 24px 0; }
- .var-vis-title { font-size: 14px; font-weight: 700; margin-bottom: 6px; color: var(--text); }
- .var-vis-sub { font-size: 12px; color: var(--text-muted); font-family: var(--mono); margin-bottom: 20px; }
- .var-grid { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 20px; }
- .var-box { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; cursor: pointer; min-width: 120px; transition: border-color .2s, transform .15s; }
- .var-box:hover { border-color: var(--accent); transform: translateY(-2px); }
- .var-box-name { font-family: var(--mono); font-size: 11px; color: var(--text-muted); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
- .type-pill { font-size: 9px; padding: 1px 7px; border-radius: 50px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; }
- .t-str { background: rgba(195,232,141,.15); color: #c3e88d; }
- .t-int { background: rgba(247,140,108,.15); color: #f78c6c; }
- .t-float { background: rgba(255,203,107,.15); color: #ffcb6b; }
- .t-bool { background: rgba(253,121,168,.15); color: #fd79a8; }
- .var-val { font-family: var(--mono); font-size: 18px; font-weight: 700; }
- .v-str { color: #c3e88d; }
- .v-int { color: #f78c6c; }
- .v-float { color: #ffcb6b; }
- .v-bool { color: #fd79a8; }
- .var-info { display: none; margin-top: 14px; padding: 12px 16px; background: rgba(108,92,231,.08); border: 1px solid rgba(108,92,231,.2); border-radius: 10px; font-family: var(--mono); font-size: 12px; color: var(--text-secondary); line-height: 1.6; }
- .var-info.show { display: block; }
- .var-input-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px; }
- .var-input { flex: 1; min-width: 120px; background: var(--surface); border: 1px solid var(--border); border-radius: 9px; padding: 10px 14px; font-family: var(--mono); font-size: 12px; color: var(--text); outline: none; transition: border-color .2s; }
- .var-input:focus { border-color: var(--accent); }
- .var-input::placeholder { color: var(--text-muted); }
- .var-add-btn { background: var(--accent); color: #fff; border: none; border-radius: 9px; padding: 10px 20px; font-size: 12px; font-weight: 700; cursor: pointer; font-family: var(--sans); transition: background .15s; }
- .var-add-btn:hover { background: #7d6ef0; }
+  .var-vis { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 24px; margin: 24px 0; }
+  .var-vis-title { font-size: 14px; font-weight: 700; margin-bottom: 6px; color: var(--text); }
+  .var-vis-sub { font-size: 12px; color: var(--text-muted); font-family: var(--mono); margin-bottom: 20px; }
+  .var-grid { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 20px; }
+  .var-box { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; cursor: pointer; min-width: 120px; transition: border-color .2s, transform .15s; }
+  .var-box:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .var-box-name { font-family: var(--mono); font-size: 11px; color: var(--text-muted); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+  .type-pill { font-size: 9px; padding: 1px 7px; border-radius: 50px; font-weight: 700; letter-spacing: .5px; text-transform: uppercase; }
+  .t-str   { background: rgba(195,232,141,.15); color: #c3e88d; }
+  .t-int   { background: rgba(247,140,108,.15); color: #f78c6c; }
+  .t-float { background: rgba(255,203,107,.15); color: #ffcb6b; }
+  .t-bool  { background: rgba(253,121,168,.15); color: #fd79a8; }
+  .var-val { font-family: var(--mono); font-size: 18px; font-weight: 700; }
+  .v-str   { color: #c3e88d; }
+  .v-int   { color: #f78c6c; }
+  .v-float { color: #ffcb6b; }
+  .v-bool  { color: #fd79a8; }
+  .var-info { display: none; margin-top: 14px; padding: 12px 16px; background: rgba(108,92,231,.08); border: 1px solid rgba(108,92,231,.2); border-radius: 10px; font-family: var(--mono); font-size: 12px; color: var(--text-secondary); line-height: 1.6; }
+  .var-info.show { display: block; }
+  .var-input-row { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 16px; }
+  .var-input { flex: 1; min-width: 120px; background: var(--surface); border: 1px solid var(--border); border-radius: 9px; padding: 10px 14px; font-family: var(--mono); font-size: 12px; color: var(--text); outline: none; transition: border-color .2s; }
+  .var-input:focus { border-color: var(--accent); }
+  .var-input::placeholder { color: var(--text-muted); }
+  .var-add-btn { background: var(--accent); color: #fff; border: none; border-radius: 9px; padding: 10px 20px; font-size: 12px; font-weight: 700; cursor: pointer; font-family: var(--sans); transition: background .15s; }
+  .var-add-btn:hover { background: #7d6ef0; }
 
- .rules-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 24px 0; }
- @media (max-width: 520px) { .rules-grid { grid-template-columns: 1fr; } }
- .rule-box { border-radius: var(--radius); padding: 20px; }
- .rule-box.ok { background: var(--green-dim); border: 1px solid rgba(0,184,148,.2); }
- .rule-box.bad { background: var(--red-dim); border: 1px solid rgba(253,121,168,.2); }
- .rule-head { font-size: 12px; font-weight: 800; margin-bottom: 14px; letter-spacing: .5px; }
- .rule-box.ok .rule-head { color: var(--green); }
- .rule-box.bad .rule-head { color: var(--red); }
- .rule-item { font-family: var(--mono); font-size: 12px; line-height: 2.2; color: var(--text-muted); }
- .rule-box.ok .rule-item span { color: var(--green); }
- .rule-box.bad .rule-item span { color: var(--red); }
+  .rules-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 24px 0; }
+  @media (max-width: 520px) { .rules-grid { grid-template-columns: 1fr; } }
+  .rule-box { border-radius: var(--radius); padding: 20px; }
+  .rule-box.ok  { background: var(--green-dim); border: 1px solid rgba(0,184,148,.2); }
+  .rule-box.bad { background: var(--red-dim); border: 1px solid rgba(253,121,168,.2); }
+  .rule-head { font-size: 12px; font-weight: 800; margin-bottom: 14px; letter-spacing: .5px; }
+  .rule-box.ok .rule-head { color: var(--green); }
+  .rule-box.bad .rule-head { color: var(--red); }
+  .rule-item { font-family: var(--mono); font-size: 12px; line-height: 2.2; color: var(--text-muted); }
+  .rule-box.ok .rule-item span { color: var(--green); }
+  .rule-box.bad .rule-item span { color: var(--red); }
 
- /* ── FLOWCHART ── */
- .flowchart {
- background: var(--card); border: 1px solid var(--border);
- border-radius: var(--radius-lg); padding: 28px; margin: 28px 0;
- overflow-x: auto;
- }
- .flowchart-title { font-size: 13px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 24px; font-family: var(--mono); }
- .fc-row { display: flex; align-items: center; justify-content: center; gap: 0; flex-wrap: nowrap; }
- .fc-node {
- border-radius: 10px; padding: 10px 18px;
- font-family: var(--mono); font-size: 12px; font-weight: 600;
- text-align: center; white-space: nowrap; flex-shrink: 0;
- }
- .fc-start { background: rgba(108,92,231,.2); border: 1px solid rgba(108,92,231,.4); color: var(--accent-bright); }
- .fc-cond { background: rgba(253,203,110,.12); border: 1px solid rgba(253,203,110,.3); color: var(--accent4); transform: rotate(0deg); }
- .fc-action { background: rgba(0,184,148,.12); border: 1px solid rgba(0,184,148,.3); color: var(--green); }
- .fc-else { background: rgba(253,121,168,.1); border: 1px solid rgba(253,121,168,.3); color: var(--red); }
- .fc-end { background: rgba(108,92,231,.12); border: 1px solid rgba(108,92,231,.25); color: var(--text-muted); }
- .fc-arrow { font-size: 18px; color: var(--text-muted); padding: 0 6px; flex-shrink: 0; }
- .fc-label { font-size: 10px; color: var(--text-muted); font-family: var(--mono); padding: 0 4px; }
- .fc-col { display: flex; flex-direction: column; align-items: center; gap: 6px; }
- .fc-branch { display: flex; align-items: flex-start; gap: 0; justify-content: center; margin: 6px 0; }
+  /* ── FLOWCHART ── */
+  .flowchart {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); padding: 28px; margin: 28px 0;
+    overflow-x: auto;
+  }
+  .flowchart-title { font-size: 13px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 24px; font-family: var(--mono); }
+  .fc-row { display: flex; align-items: center; justify-content: center; gap: 0; flex-wrap: nowrap; }
+  .fc-node {
+    border-radius: 10px; padding: 10px 18px;
+    font-family: var(--mono); font-size: 12px; font-weight: 600;
+    text-align: center; white-space: nowrap; flex-shrink: 0;
+  }
+  .fc-start  { background: rgba(108,92,231,.2); border: 1px solid rgba(108,92,231,.4); color: var(--accent-bright); }
+  .fc-cond   { background: rgba(253,203,110,.12); border: 1px solid rgba(253,203,110,.3); color: var(--accent4); transform: rotate(0deg); }
+  .fc-action { background: rgba(0,184,148,.12); border: 1px solid rgba(0,184,148,.3); color: var(--green); }
+  .fc-else   { background: rgba(253,121,168,.1); border: 1px solid rgba(253,121,168,.3); color: var(--red); }
+  .fc-end    { background: rgba(108,92,231,.12); border: 1px solid rgba(108,92,231,.25); color: var(--text-muted); }
+  .fc-arrow  { font-size: 18px; color: var(--text-muted); padding: 0 6px; flex-shrink: 0; }
+  .fc-label  { font-size: 10px; color: var(--text-muted); font-family: var(--mono); padding: 0 4px; }
+  .fc-col    { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+  .fc-branch { display: flex; align-items: flex-start; gap: 0; justify-content: center; margin: 6px 0; }
 
- /* ── LOOP VISUALIZER ── */
- .loop-vis {
- background: var(--card); border: 1px solid var(--border);
- border-radius: var(--radius-lg); padding: 24px; margin: 24px 0;
- }
- .loop-vis-title { font-size: 14px; font-weight: 700; margin-bottom: 6px; color: var(--text); }
- .loop-vis-sub { font-size: 12px; color: var(--text-muted); font-family: var(--mono); margin-bottom: 20px; }
- .loop-controls { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; align-items: center; }
- .loop-input { background: var(--surface); border: 1px solid var(--border); border-radius: 9px; padding: 8px 14px; font-family: var(--mono); font-size: 12px; color: var(--text); outline: none; width: 80px; transition: border-color .2s; }
- .loop-input:focus { border-color: var(--accent); }
- .loop-label { font-size: 12px; color: var(--text-muted); font-family: var(--mono); }
- .loop-btn { background: var(--accent); color: #fff; border: none; border-radius: 9px; padding: 8px 18px; font-size: 12px; font-weight: 700; cursor: pointer; font-family: var(--sans); transition: background .15s; }
- .loop-btn:hover { background: #7d6ef0; }
- .loop-track { display: flex; flex-wrap: wrap; gap: 8px; min-height: 48px; align-items: center; }
- .loop-step { width: 40px; height: 40px; border-radius: 10px; background: var(--surface); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 13px; font-weight: 700; color: var(--text-muted); transition: all .3s; }
- .loop-step.active { background: rgba(108,92,231,.25); border-color: var(--accent); color: var(--accent-bright); transform: scale(1.15); }
- .loop-step.done { background: var(--green-dim); border-color: rgba(0,184,148,.4); color: var(--green); }
+  /* ── LOOP VISUALIZER ── */
+  .loop-vis {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: var(--radius-lg); padding: 24px; margin: 24px 0;
+  }
+  .loop-vis-title { font-size: 14px; font-weight: 700; margin-bottom: 6px; color: var(--text); }
+  .loop-vis-sub { font-size: 12px; color: var(--text-muted); font-family: var(--mono); margin-bottom: 20px; }
+  .loop-controls { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; align-items: center; }
+  .loop-input { background: var(--surface); border: 1px solid var(--border); border-radius: 9px; padding: 8px 14px; font-family: var(--mono); font-size: 12px; color: var(--text); outline: none; width: 80px; transition: border-color .2s; }
+  .loop-input:focus { border-color: var(--accent); }
+  .loop-label { font-size: 12px; color: var(--text-muted); font-family: var(--mono); }
+  .loop-btn { background: var(--accent); color: #fff; border: none; border-radius: 9px; padding: 8px 18px; font-size: 12px; font-weight: 700; cursor: pointer; font-family: var(--sans); transition: background .15s; }
+  .loop-btn:hover { background: #7d6ef0; }
+  .loop-track { display: flex; flex-wrap: wrap; gap: 8px; min-height: 48px; align-items: center; }
+  .loop-step { width: 40px; height: 40px; border-radius: 10px; background: var(--surface); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-family: var(--mono); font-size: 13px; font-weight: 700; color: var(--text-muted); transition: all .3s; }
+  .loop-step.active { background: rgba(108,92,231,.25); border-color: var(--accent); color: var(--accent-bright); transform: scale(1.15); }
+  .loop-step.done { background: var(--green-dim); border-color: rgba(0,184,148,.4); color: var(--green); }
 
- .score-bar { position: fixed; bottom: 24px; right: 24px; z-index: 300; background: var(--card); border: 1px solid var(--border); border-radius: 50px; padding: 10px 20px; display: flex; align-items: center; gap: 10px; box-shadow: var(--shadow); font-size: 13px; font-weight: 600; color: var(--text-secondary); transition: transform .2s; }
- .score-val { font-size: 18px; font-weight: 800; color: var(--accent-bright); font-family: var(--mono); transition: transform .3s, color .3s; display: inline-block; }
+  .score-bar { position: fixed; bottom: 24px; right: 24px; z-index: 300; background: var(--card); border: 1px solid var(--border); border-radius: 50px; padding: 10px 20px; display: flex; align-items: center; gap: 10px; box-shadow: var(--shadow); font-size: 13px; font-weight: 600; color: var(--text-secondary); transition: transform .2s; }
+  .score-val { font-size: 18px; font-weight: 800; color: var(--accent-bright); font-family: var(--mono); transition: transform .3s, color .3s; display: inline-block; }
 
- .feature-pills { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 40px; }
- .pill { font-size: 12px; font-weight: 500; color: var(--text-secondary); background: var(--card); border: 1px solid var(--border); padding: 6px 14px; border-radius: 50px; }
+  .feature-pills { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-bottom: 40px; }
+  .pill { font-size: 12px; font-weight: 500; color: var(--text-secondary); background: var(--card); border: 1px solid var(--border); padding: 6px 14px; border-radius: 50px; }
 
- @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
- @keyframes ping { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: .5; transform: scale(1.3); } }
- @keyframes slideIn { from { opacity: 0; transform: translateX(-10px); } to { opacity: 1; transform: translateX(0); } }
- @keyframes popIn { 0% { transform: scale(0.6); opacity: 0; } 70% { transform: scale(1.1); } 100% { transform: scale(1); opacity: 1; } }
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  @keyframes ping { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: .5; transform: scale(1.3); } }
+  @keyframes slideIn { from { opacity: 0; transform: translateX(-10px); } to { opacity: 1; transform: translateX(0); } }
+  @keyframes popIn { 0% { transform: scale(0.6); opacity: 0; } 70% { transform: scale(1.1); } 100% { transform: scale(1); opacity: 1; } }
 
- @media (max-width: 680px) {
- .page-wrap { padding: 0 16px 100px; }
- .hero { padding: 60px 0 40px; }
- .hero-stats { gap: 24px; }
- .tab { padding: 14px 16px; font-size: 12px; }
- .concept-header { padding: 16px 16px 0; }
- .code-area { font-size: 12px; }
- .score-bar { bottom: 16px; right: 16px; padding: 8px 16px; }
- }
- @media (max-width: 400px) {
- h1 { letter-spacing: -2px; }
- .info-grid { grid-template-columns: 1fr; }
- }
+  @media (max-width: 680px) {
+    .page-wrap { padding: 0 16px 100px; }
+    .hero { padding: 60px 0 40px; }
+    .hero-stats { gap: 24px; }
+    .tab { padding: 14px 16px; font-size: 12px; }
+    .concept-header { padding: 16px 16px 0; }
+    .code-area { font-size: 12px; }
+    .score-bar { bottom: 16px; right: 16px; padding: 8px 16px; }
+  }
+  @media (max-width: 400px) {
+    h1 { letter-spacing: -2px; }
+    .info-grid { grid-template-columns: 1fr; }
+  }
 </style>
 </head>
 <body>
@@ -304,132 +304,132 @@
 
 <div class="page-wrap">
 
- <header class="hero">
- <div class="hero-badge">
- <div class="ping"></div>
- Plataforma interactiva de Python
- </div>
- <h1><span class="py">Py</span><span class="learn">Learn</span></h1>
- <p class="hero-desc">
- Aprende Python desde cero con lecciones interactivas, editor de código en vivo
- y quizzes. Sin instalaciones — todo corre en el navegador.
- </p>
- <div class="hero-stats">
- <div class="stat"><div class="stat-num">4</div><div class="stat-label">Módulos</div></div>
- <div class="stat"><div class="stat-num">12+</div><div class="stat-label">Ejercicios</div></div>
- <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Interactivo</div></div>
- </div>
- <div class="feature-pills">
- <span class="pill"> Editor en vivo</span>
- <span class="pill"> Quizzes gamificados</span>
- <span class="pill"> Sin instalación</span>
- <span class="pill"> Python 3</span>
- <span class="pill"> Sandbox seguro</span>
- </div>
- <div class="progress-wrap">
- <div class="progress-meta">
- <span>Progreso del curso</span>
- <span id="progress-pct">0%</span>
- </div>
- <div class="progress-track">
- <div class="progress-fill" id="progress-fill"></div>
- </div>
- </div>
- </header>
+  <header class="hero">
+    <div class="hero-badge">
+      <div class="ping"></div>
+      Plataforma interactiva de Python
+    </div>
+    <h1><span class="py">Py</span><span class="learn">Learn</span></h1>
+    <p class="hero-desc">
+      Aprende Python desde cero con lecciones interactivas, editor de código en vivo
+      y quizzes. Sin instalaciones — todo corre en el navegador.
+    </p>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-num">4</div><div class="stat-label">Módulos</div></div>
+      <div class="stat"><div class="stat-num">12+</div><div class="stat-label">Ejercicios</div></div>
+      <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Interactivo</div></div>
+    </div>
+    <div class="feature-pills">
+      <span class="pill"> Editor en vivo</span>
+      <span class="pill"> Quizzes gamificados</span>
+      <span class="pill"> Sin instalación</span>
+      <span class="pill"> Python 3</span>
+      <span class="pill"> Sandbox seguro</span>
+    </div>
+    <div class="progress-wrap">
+      <div class="progress-meta">
+        <span>Progreso del curso</span>
+        <span id="progress-pct">0%</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="progress-fill"></div>
+      </div>
+    </div>
+  </header>
 
- <nav>
- <button class="tab active" onclick="showSection('print', this)">01 · print()</button>
- <button class="tab" onclick="showSection('vars', this)">02 · Variables</button>
- <button class="tab" onclick="showSection('cond', this)">03 · Condicionales</button>
- <button class="tab" onclick="showSection('loops', this)">04 · Ciclos</button>
- </nav>
+  <nav>
+    <button class="tab active" onclick="showSection('print', this)">01 · print()</button>
+    <button class="tab" onclick="showSection('vars', this)">02 · Variables</button>
+    <button class="tab" onclick="showSection('cond', this)">03 · Condicionales</button>
+    <button class="tab" onclick="showSection('loops', this)">04 · Ciclos</button>
+  </nav>
 
- <!-- ════ SECCIÓN 1: PRINT ════ -->
- <section id="sec-print" class="section active">
+  <!-- ════ SECCIÓN 1: PRINT ════ -->
+  <section id="sec-print" class="section active">
 
- <div class="module-tag">Módulo 01</div>
- <h2 class="section-h2">La función<br><code>print()</code></h2>
- <p class="section-lead">
- <code>print()</code> es la función más fundamental de Python. Le indica al intérprete que
- tome lo que sea que esté dentro de los paréntesis y lo muestre en la consola.
- Toda tu interacción visible con el programa empieza aquí.
- </p>
+    <div class="module-tag">Módulo 01</div>
+    <h2 class="section-h2">La función<br><code>print()</code></h2>
+    <p class="section-lead">
+      <code>print()</code> es la función más fundamental de Python. Le indica al intérprete que
+      tome lo que sea que esté dentro de los paréntesis y lo muestre en la consola.
+      Toda tu interacción visible con el programa empieza aquí.
+    </p>
 
- <div class="info-grid">
- <div class="info-card">
- <div class="info-card-icon"></div>
- <div class="info-card-title">Qué hace print()</div>
- <div class="info-card-desc">Toma uno o varios argumentos y los escribe en la salida estándar (stdout), seguidos de un salto de línea automático.</div>
- </div>
- <div class="info-card">
- <div class="info-card-icon"></div>
- <div class="info-card-title">Strings (cadenas)</div>
- <div class="info-card-desc">El texto debe ir entre comillas simples <code>'hola'</code> o dobles <code>"hola"</code>. Ambas son equivalentes en Python.</div>
- </div>
- <div class="info-card">
- <div class="info-card-icon"></div>
- <div class="info-card-title">Números directos</div>
- <div class="info-card-desc">Los números no necesitan comillas. <code>print(42)</code> imprime el entero 42 y <code>print(3.14)</code> imprime el float.</div>
- </div>
- <div class="info-card">
- <div class="info-card-icon"></div>
- <div class="info-card-title">Múltiples argumentos</div>
- <div class="info-card-desc">Puedes pasar varios valores separados por coma: <code>print("Hola", nombre)</code>. Python los une con un espacio.</div>
- </div>
- </div>
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="info-card-icon"></div>
+        <div class="info-card-title">Qué hace print()</div>
+        <div class="info-card-desc">Toma uno o varios argumentos y los escribe en la salida estándar (stdout), seguidos de un salto de línea automático.</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon"></div>
+        <div class="info-card-title">Strings (cadenas)</div>
+        <div class="info-card-desc">El texto debe ir entre comillas simples <code>'hola'</code> o dobles <code>"hola"</code>. Ambas son equivalentes en Python.</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon"></div>
+        <div class="info-card-title">Números directos</div>
+        <div class="info-card-desc">Los números no necesitan comillas. <code>print(42)</code> imprime el entero 42 y <code>print(3.14)</code> imprime el float.</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon"></div>
+        <div class="info-card-title">Múltiples argumentos</div>
+        <div class="info-card-desc">Puedes pasar varios valores separados por coma: <code>print("Hola", nombre)</code>. Python los une con un espacio.</div>
+      </div>
+    </div>
 
- <div class="concept-card">
- <div class="concept-header">
- <div class="concept-icon ci-purple"></div>
- <div class="concept-meta">
- <div class="concept-title">Tu primer programa</div>
- <div class="concept-sub">print() con texto y números — Edita el código y presiona Ejecutar</div>
- </div>
- </div>
- <div class="playground">
- <div class="play-toolbar">
- <div class="dots"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div></div>
- <div class="toolbar-right">
- <span class="lang-tag">Python 3</span>
- <button class="run-btn" onclick="runCode(this)">▶ Ejecutar</button>
- </div>
- </div>
- <textarea class="code-area" rows="7">print("¡Hola, mundo!")
+    <div class="concept-card">
+      <div class="concept-header">
+        <div class="concept-icon ci-purple"></div>
+        <div class="concept-meta">
+          <div class="concept-title">Tu primer programa</div>
+          <div class="concept-sub">print() con texto y números — Edita el código y presiona Ejecutar</div>
+        </div>
+      </div>
+      <div class="playground">
+        <div class="play-toolbar">
+          <div class="dots"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div></div>
+          <div class="toolbar-right">
+            <span class="lang-tag">Python 3</span>
+            <button class="run-btn" onclick="runCode(this)">▶ Ejecutar</button>
+          </div>
+        </div>
+        <textarea class="code-area" rows="7">print("¡Hola, mundo!")
 print("Bienvenido a PyLearn")
 print(2025)
 print(3.14159)
 print("Python" + " es " + "genial")</textarea>
- <div class="output-area">
- <div class="output-label">▸ Salida del programa</div>
- <div class="output-text"></div>
- </div>
- </div>
- </div>
+        <div class="output-area">
+          <div class="output-label">▸ Salida del programa</div>
+          <div class="output-text"></div>
+        </div>
+      </div>
+    </div>
 
- <div class="explain-block">
- <span class="emoji"></span>
- <p>Cuando escribes <strong>print("¡Hola, mundo!")</strong>, las comillas le indican a Python que
- ese es un texto literal (string). El texto aparece sin comillas en la salida porque las comillas
- son solo la notación de Python, no parte del dato en sí.</p>
- </div>
+    <div class="explain-block">
+      <span class="emoji"></span>
+      <p>Cuando escribes <strong>print("¡Hola, mundo!")</strong>, las comillas le indican a Python que
+      ese es un texto literal (string). El texto aparece sin comillas en la salida porque las comillas
+      son solo la notación de Python, no parte del dato en sí.</p>
+    </div>
 
- <div class="concept-card">
- <div class="concept-header">
- <div class="concept-icon ci-pink"></div>
- <div class="concept-meta">
- <div class="concept-title">Parámetros sep y end</div>
- <div class="concept-sub">Controla el separador entre valores y el carácter final</div>
- </div>
- </div>
- <div class="playground">
- <div class="play-toolbar">
- <div class="dots"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div></div>
- <div class="toolbar-right">
- <span class="lang-tag">Python 3</span>
- <button class="run-btn" onclick="runCode(this)">▶ Ejecutar</button>
- </div>
- </div>
- <textarea class="code-area" rows="10">print("Lunes", "Martes", "Miércoles")
+    <div class="concept-card">
+      <div class="concept-header">
+        <div class="concept-icon ci-pink"></div>
+        <div class="concept-meta">
+          <div class="concept-title">Parámetros sep y end</div>
+          <div class="concept-sub">Controla el separador entre valores y el carácter final</div>
+        </div>
+      </div>
+      <div class="playground">
+        <div class="play-toolbar">
+          <div class="dots"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div></div>
+          <div class="toolbar-right">
+            <span class="lang-tag">Python 3</span>
+            <button class="run-btn" onclick="runCode(this)">▶ Ejecutar</button>
+          </div>
+        </div>
+        <textarea class="code-area" rows="10">print("Lunes", "Martes", "Miércoles")
 print("Lunes", "Martes", "Miércoles", sep=" | ")
 print("A", "B", "C", sep="-")
 
@@ -440,37 +440,37 @@ print("Línea 1")
 print("Línea 2")
 print("Línea 3", end="\n\n")
 print("Con espacio extra arriba")</textarea>
- <div class="output-area">
- <div class="output-label">▸ Salida del programa</div>
- <div class="output-text"></div>
- </div>
- </div>
- </div>
+        <div class="output-area">
+          <div class="output-label">▸ Salida del programa</div>
+          <div class="output-text"></div>
+        </div>
+      </div>
+    </div>
 
- <div class="explain-block">
- <span class="emoji"></span>
- <p><strong>sep</strong> controla qué carácter aparece <strong>entre</strong> los argumentos (por defecto un espacio).
- <strong>end</strong> controla qué carácter va al <strong>final</strong> de la línea (por defecto <strong>\n</strong>,
- que es un salto de línea). Modificarlos te da control total sobre el formato de salida.</p>
- </div>
+    <div class="explain-block">
+      <span class="emoji"></span>
+      <p><strong>sep</strong> controla qué carácter aparece <strong>entre</strong> los argumentos (por defecto un espacio).
+      <strong>end</strong> controla qué carácter va al <strong>final</strong> de la línea (por defecto <strong>\n</strong>,
+      que es un salto de línea). Modificarlos te da control total sobre el formato de salida.</p>
+    </div>
 
- <div class="concept-card">
- <div class="concept-header">
- <div class="concept-icon ci-green"></div>
- <div class="concept-meta">
- <div class="concept-title">F-strings — interpolación moderna</div>
- <div class="concept-sub">Incrusta variables y expresiones dentro de texto con f"..."</div>
- </div>
- </div>
- <div class="playground">
- <div class="play-toolbar">
- <div class="dots"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div></div>
- <div class="toolbar-right">
- <span class="lang-tag">Python 3</span>
- <button class="run-btn" onclick="runCode(this)">▶ Ejecutar</button>
- </div>
- </div>
- <textarea class="code-area" rows="9">nombre = "Valentina"
+    <div class="concept-card">
+      <div class="concept-header">
+        <div class="concept-icon ci-green"></div>
+        <div class="concept-meta">
+          <div class="concept-title">F-strings — interpolación moderna</div>
+          <div class="concept-sub">Incrusta variables y expresiones dentro de texto con f"..."</div>
+        </div>
+      </div>
+      <div class="playground">
+        <div class="play-toolbar">
+          <div class="dots"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div></div>
+          <div class="toolbar-right">
+            <span class="lang-tag">Python 3</span>
+            <button class="run-btn" onclick="runCode(this)">▶ Ejecutar</button>
+          </div>
+        </div>
+        <textarea class="code-area" rows="9">nombre = "Valentina"
 edad = 21
 ciudad = "La Paz"
 pi = 3.14159
@@ -479,126 +479,126 @@ print(f"Hola, {nombre}!")
 print(f"Tienes {edad} años y vives en {ciudad}.")
 print(f"Pi redondeado: {pi:.2f}")
 print(f"El doble de tu edad es {edad * 2}")</textarea>
- <div class="output-area">
- <div class="output-label">▸ Salida del programa</div>
- <div class="output-text"></div>
- </div>
- </div>
- </div>
+        <div class="output-area">
+          <div class="output-label">▸ Salida del programa</div>
+          <div class="output-text"></div>
+        </div>
+      </div>
+    </div>
 
- <div class="explain-block">
- <span class="emoji"></span>
- <p>Las <strong>f-strings</strong> se crean poniendo una <strong>f</strong> antes de la comilla inicial.
- Dentro de <strong>{ }</strong> puedes escribir cualquier expresión Python válida: cálculos, variables,
- formateo de números como <strong>:.2f</strong> (2 decimales). Todo se evalúa en tiempo real.</p>
- </div>
+    <div class="explain-block">
+      <span class="emoji"></span>
+      <p>Las <strong>f-strings</strong> se crean poniendo una <strong>f</strong> antes de la comilla inicial.
+      Dentro de <strong>{ }</strong> puedes escribir cualquier expresión Python válida: cálculos, variables,
+      formateo de números como <strong>:.2f</strong> (2 decimales). Todo se evalúa en tiempo real.</p>
+    </div>
 
- <div class="quiz-card" id="quiz1">
- <div class="quiz-badge"> Mini Reto</div>
- <div class="quiz-q">¿Cuál instrucción imprime exactamente: <code>Python-es-genial</code> ?</div>
- <div class="quiz-opts">
- <div class="quiz-opt" onclick="answer(this, false, 'quiz1')">
- <div class="quiz-letter">A</div>
- <span><code>print("Python", "es", "genial")</code></span>
- </div>
- <div class="quiz-opt" onclick="answer(this, true, 'quiz1')">
- <div class="quiz-letter">B</div>
- <span><code>print("Python","es","genial",sep="-")</code></span>
- </div>
- <div class="quiz-opt" onclick="answer(this, false, 'quiz1')">
- <div class="quiz-letter">C</div>
- <span><code>print("Python-es-genial", end="")</code></span>
- </div>
- <div class="quiz-opt" onclick="answer(this, false, 'quiz1')">
- <div class="quiz-letter">D</div>
- <span><code>print(Python, es, genial)</code></span>
- </div>
- </div>
- <div class="quiz-fb" id="quiz1-fb"></div>
- </div>
+    <div class="quiz-card" id="quiz1">
+      <div class="quiz-badge"> Mini Reto</div>
+      <div class="quiz-q">¿Cuál instrucción imprime exactamente: <code>Python-es-genial</code> ?</div>
+      <div class="quiz-opts">
+        <div class="quiz-opt" onclick="answer(this, false, 'quiz1')">
+          <div class="quiz-letter">A</div>
+          <span><code>print("Python", "es", "genial")</code></span>
+        </div>
+        <div class="quiz-opt" onclick="answer(this, true, 'quiz1')">
+          <div class="quiz-letter">B</div>
+          <span><code>print("Python","es","genial",sep="-")</code></span>
+        </div>
+        <div class="quiz-opt" onclick="answer(this, false, 'quiz1')">
+          <div class="quiz-letter">C</div>
+          <span><code>print("Python-es-genial", end="")</code></span>
+        </div>
+        <div class="quiz-opt" onclick="answer(this, false, 'quiz1')">
+          <div class="quiz-letter">D</div>
+          <span><code>print(Python, es, genial)</code></span>
+        </div>
+      </div>
+      <div class="quiz-fb" id="quiz1-fb"></div>
+    </div>
 
- </section>
+  </section>
 
- <!-- ════ SECCIÓN 2: VARIABLES ════ -->
- <section id="sec-vars" class="section">
+  <!-- ════ SECCIÓN 2: VARIABLES ════ -->
+  <section id="sec-vars" class="section">
 
- <div class="module-tag">Módulo 02</div>
- <h2 class="section-h2">Variables:<br>guardar información</h2>
- <p class="section-lead">
- Una <code>variable</code> es como una caja etiquetada en la memoria del computador
- donde guardas un dato. En Python no necesitas declarar el tipo —
- el intérprete lo infiere automáticamente al asignar el valor.
- </p>
+    <div class="module-tag">Módulo 02</div>
+    <h2 class="section-h2">Variables:<br>guardar información</h2>
+    <p class="section-lead">
+      Una <code>variable</code> es como una caja etiquetada en la memoria del computador
+      donde guardas un dato. En Python no necesitas declarar el tipo —
+      el intérprete lo infiere automáticamente al asignar el valor.
+    </p>
 
- <div class="info-grid">
- <div class="info-card">
- <div class="info-card-icon"></div>
- <div class="info-card-title">str — Texto</div>
- <div class="info-card-desc">Secuencias de caracteres entre comillas. <code>"hola"</code>, <code>'mundo'</code>. Soportan emojis, acentos y Unicode completo.</div>
- </div>
- <div class="info-card">
- <div class="info-card-icon"></div>
- <div class="info-card-title">int — Entero</div>
- <div class="info-card-desc">Números enteros sin límite de tamaño: <code>42</code>, <code>-7</code>, <code>1_000_000</code>. Los guiones bajos mejoran la legibilidad.</div>
- </div>
- <div class="info-card">
- <div class="info-card-icon"></div>
- <div class="info-card-title">float — Decimal</div>
- <div class="info-card-desc">Números con punto decimal: <code>3.14</code>, <code>-0.5</code>, <code>1e10</code>. Ideal para medidas, precios y cálculos continuos.</div>
- </div>
- <div class="info-card">
- <div class="info-card-icon"></div>
- <div class="info-card-title">bool — Booleano</div>
- <div class="info-card-desc">Solo dos valores: <code>True</code> o <code>False</code>. Controlan el flujo lógico del programa mediante condiciones.</div>
- </div>
- </div>
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="info-card-icon"></div>
+        <div class="info-card-title">str — Texto</div>
+        <div class="info-card-desc">Secuencias de caracteres entre comillas. <code>"hola"</code>, <code>'mundo'</code>. Soportan emojis, acentos y Unicode completo.</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon"></div>
+        <div class="info-card-title">int — Entero</div>
+        <div class="info-card-desc">Números enteros sin límite de tamaño: <code>42</code>, <code>-7</code>, <code>1_000_000</code>. Los guiones bajos mejoran la legibilidad.</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon"></div>
+        <div class="info-card-title">float — Decimal</div>
+        <div class="info-card-desc">Números con punto decimal: <code>3.14</code>, <code>-0.5</code>, <code>1e10</code>. Ideal para medidas, precios y cálculos continuos.</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon"></div>
+        <div class="info-card-title">bool — Booleano</div>
+        <div class="info-card-desc">Solo dos valores: <code>True</code> o <code>False</code>. Controlan el flujo lógico del programa mediante condiciones.</div>
+      </div>
+    </div>
 
- <div class="var-vis">
- <div class="var-vis-title"> Visualizador de Variables</div>
- <p class="var-vis-sub">Haz clic en una caja para ver información detallada del tipo · Crea tu propia variable abajo</p>
- <div class="var-grid" id="var-grid">
- <div class="var-box" onclick="showVarInfo('str','Texto entre comillas. Longitud: 7 caracteres. Puedes unir strings con + o usar f-strings.')">
- <div class="var-box-name">nombre <span class="type-pill t-str">str</span></div>
- <div class="var-val v-str">"Carlos"</div>
- </div>
- <div class="var-box" onclick="showVarInfo('int','Número entero. Ocupa 28 bytes en CPython. Puede ser arbitrariamente grande sin overflow.')">
- <div class="var-box-name">edad <span class="type-pill t-int">int</span></div>
- <div class="var-val v-int">22</div>
- </div>
- <div class="var-box" onclick="showVarInfo('float','Número de coma flotante IEEE-754 de 64 bits. Precisión de ~15 dígitos significativos.')">
- <div class="var-box-name">altura <span class="type-pill t-float">float</span></div>
- <div class="var-val v-float">1.75</div>
- </div>
- <div class="var-box" onclick="showVarInfo('bool','Subclase de int en Python. True == 1 y False == 0. Se puede usar en operaciones aritméticas.')">
- <div class="var-box-name">activo <span class="type-pill t-bool">bool</span></div>
- <div class="var-val v-bool">True</div>
- </div>
- </div>
- <div class="var-info" id="var-info"></div>
- <div class="var-input-row">
- <input class="var-input" id="new-var-name" placeholder="nombre_var" maxlength="20">
- <input class="var-input" id="new-var-val" placeholder="valor (ej: 42 o 'hola')" maxlength="30">
- <button class="var-add-btn" onclick="addVar()">+ Crear</button>
- </div>
- </div>
+    <div class="var-vis">
+      <div class="var-vis-title"> Visualizador de Variables</div>
+      <p class="var-vis-sub">Haz clic en una caja para ver información detallada del tipo · Crea tu propia variable abajo</p>
+      <div class="var-grid" id="var-grid">
+        <div class="var-box" onclick="showVarInfo('str','Texto entre comillas. Longitud: 7 caracteres. Puedes unir strings con + o usar f-strings.')">
+          <div class="var-box-name">nombre <span class="type-pill t-str">str</span></div>
+          <div class="var-val v-str">"Carlos"</div>
+        </div>
+        <div class="var-box" onclick="showVarInfo('int','Número entero. Ocupa 28 bytes en CPython. Puede ser arbitrariamente grande sin overflow.')">
+          <div class="var-box-name">edad <span class="type-pill t-int">int</span></div>
+          <div class="var-val v-int">22</div>
+        </div>
+        <div class="var-box" onclick="showVarInfo('float','Número de coma flotante IEEE-754 de 64 bits. Precisión de ~15 dígitos significativos.')">
+          <div class="var-box-name">altura <span class="type-pill t-float">float</span></div>
+          <div class="var-val v-float">1.75</div>
+        </div>
+        <div class="var-box" onclick="showVarInfo('bool','Subclase de int en Python. True == 1 y False == 0. Se puede usar en operaciones aritméticas.')">
+          <div class="var-box-name">activo <span class="type-pill t-bool">bool</span></div>
+          <div class="var-val v-bool">True</div>
+        </div>
+      </div>
+      <div class="var-info" id="var-info"></div>
+      <div class="var-input-row">
+        <input class="var-input" id="new-var-name" placeholder="nombre_var" maxlength="20">
+        <input class="var-input" id="new-var-val" placeholder="valor (ej: 42 o 'hola')" maxlength="30">
+        <button class="var-add-btn" onclick="addVar()">+ Crear</button>
+      </div>
+    </div>
 
- <div class="concept-card">
- <div class="concept-header">
- <div class="concept-icon ci-purple"></div>
- <div class="concept-meta">
- <div class="concept-title">Crear y usar variables</div>
- <div class="concept-sub">El operador = asigna valores — prueba cambiar los datos</div>
- </div>
- </div>
- <div class="playground">
- <div class="play-toolbar">
- <div class="dots"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div></div>
- <div class="toolbar-right">
- <span class="lang-tag">Python 3</span>
- <button class="run-btn" onclick="runCode(this)">▶ Ejecutar</button>
- </div>
- </div>
- <textarea class="code-area" rows="10">nombre = "María"
+    <div class="concept-card">
+      <div class="concept-header">
+        <div class="concept-icon ci-purple"></div>
+        <div class="concept-meta">
+          <div class="concept-title">Crear y usar variables</div>
+          <div class="concept-sub">El operador = asigna valores — prueba cambiar los datos</div>
+        </div>
+      </div>
+      <div class="playground">
+        <div class="play-toolbar">
+          <div class="dots"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div></div>
+          <div class="toolbar-right">
+            <span class="lang-tag">Python 3</span>
+            <button class="run-btn" onclick="runCode(this)">▶ Ejecutar</button>
+          </div>
+        </div>
+        <textarea class="code-area" rows="10">nombre = "María"
 edad = 19
 ciudad = "La Paz"
 altura = 1.68
@@ -608,38 +608,38 @@ print(nombre)
 print(edad)
 print(f"{nombre} tiene {edad} años y vive en {ciudad}")
 print(f"Tipo de 'edad': {type(edad).__name__}")</textarea>
- <div class="output-area">
- <div class="output-label">▸ Salida del programa</div>
- <div class="output-text"></div>
- </div>
- </div>
- </div>
+        <div class="output-area">
+          <div class="output-label">▸ Salida del programa</div>
+          <div class="output-text"></div>
+        </div>
+      </div>
+    </div>
 
- <div class="explain-block">
- <span class="emoji"></span>
- <p>El signo <strong>=</strong> en Python es el <strong>operador de asignación</strong>.
- No significa "igual" como en matemáticas, sino <strong>"guarda este valor en esta caja"</strong>.
- Se lee de derecha a izquierda: el valor de la derecha se almacena en la variable de la izquierda.
- La función <strong>type()</strong> revela qué tipo de dato contiene una variable.</p>
- </div>
+    <div class="explain-block">
+      <span class="emoji"></span>
+      <p>El signo <strong>=</strong> en Python es el <strong>operador de asignación</strong>.
+      No significa "igual" como en matemáticas, sino <strong>"guarda este valor en esta caja"</strong>.
+      Se lee de derecha a izquierda: el valor de la derecha se almacena en la variable de la izquierda.
+      La función <strong>type()</strong> revela qué tipo de dato contiene una variable.</p>
+    </div>
 
- <div class="concept-card">
- <div class="concept-header">
- <div class="concept-icon ci-pink"></div>
- <div class="concept-meta">
- <div class="concept-title">Las variables pueden cambiar</div>
- <div class="concept-sub">Reasignación y operadores aumentados +=, -=, *=</div>
- </div>
- </div>
- <div class="playground">
- <div class="play-toolbar">
- <div class="dots"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div></div>
- <div class="toolbar-right">
- <span class="lang-tag">Python 3</span>
- <button class="run-btn" onclick="runCode(this)">▶ Ejecutar</button>
- </div>
- </div>
- <textarea class="code-area" rows="10">puntos = 0
+    <div class="concept-card">
+      <div class="concept-header">
+        <div class="concept-icon ci-pink"></div>
+        <div class="concept-meta">
+          <div class="concept-title">Las variables pueden cambiar</div>
+          <div class="concept-sub">Reasignación y operadores aumentados +=, -=, *=</div>
+        </div>
+      </div>
+      <div class="playground">
+        <div class="play-toolbar">
+          <div class="dots"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div></div>
+          <div class="toolbar-right">
+            <span class="lang-tag">Python 3</span>
+            <button class="run-btn" onclick="runCode(this)">▶ Ejecutar</button>
+          </div>
+        </div>
+        <textarea class="code-area" rows="10">puntos = 0
 print(f"Puntos iniciales: {puntos}")
 
 puntos = 10
@@ -650,328 +650,328 @@ print(f"Después de nivel 2: {puntos}")
 
 puntos += 50
 print(f"Puntos finales: {puntos}")</textarea>
- <div class="output-area">
- <div class="output-label">▸ Salida del programa</div>
- <div class="output-text"></div>
- </div>
- </div>
- </div>
+        <div class="output-area">
+          <div class="output-label">▸ Salida del programa</div>
+          <div class="output-text"></div>
+        </div>
+      </div>
+    </div>
 
- <div class="explain-block">
- <span class="emoji"></span>
- <p><strong>puntos = puntos + 25</strong> significa: toma el valor actual de <strong>puntos</strong>,
- súmale 25 y guarda el resultado de nuevo en <strong>puntos</strong>.
- El operador <strong>+=</strong> es un atajo equivalente. También existen <strong>-=</strong>,
- <strong>*=</strong>, <strong>/=</strong> y <strong>//=</strong> para las otras operaciones.</p>
- </div>
+    <div class="explain-block">
+      <span class="emoji"></span>
+      <p><strong>puntos = puntos + 25</strong> significa: toma el valor actual de <strong>puntos</strong>,
+      súmale 25 y guarda el resultado de nuevo en <strong>puntos</strong>.
+      El operador <strong>+=</strong> es un atajo equivalente. También existen <strong>-=</strong>,
+      <strong>*=</strong>, <strong>/=</strong> y <strong>//=</strong> para las otras operaciones.</p>
+    </div>
 
- <div class="concept-card">
- <div class="concept-header">
- <div class="concept-icon ci-green"></div>
- <div class="concept-meta">
- <div class="concept-title">Variables en acción</div>
- <div class="concept-sub">Problema real: calculadora de precios con descuento</div>
- </div>
- </div>
- <div class="playground">
- <div class="play-toolbar">
- <div class="dots"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div></div>
- <div class="toolbar-right">
- <span class="lang-tag">Python 3</span>
- <button class="run-btn" onclick="runCode(this)">▶ Ejecutar</button>
- </div>
- </div>
- <textarea class="code-area" rows="11">precio_producto = 25.50
+    <div class="concept-card">
+      <div class="concept-header">
+        <div class="concept-icon ci-green"></div>
+        <div class="concept-meta">
+          <div class="concept-title">Variables en acción</div>
+          <div class="concept-sub">Problema real: calculadora de precios con descuento</div>
+        </div>
+      </div>
+      <div class="playground">
+        <div class="play-toolbar">
+          <div class="dots"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div></div>
+          <div class="toolbar-right">
+            <span class="lang-tag">Python 3</span>
+            <button class="run-btn" onclick="runCode(this)">▶ Ejecutar</button>
+          </div>
+        </div>
+        <textarea class="code-area" rows="11">precio_producto = 25.50
 cantidad = 3
 descuento = 0.10
 
 subtotal = precio_producto * cantidad
-ahorro = subtotal * descuento
-total = subtotal - ahorro
+ahorro   = subtotal * descuento
+total    = subtotal - ahorro
 
-print(f"Subtotal: Bs. {subtotal:.2f}")
-print(f"Descuento: Bs. {ahorro:.2f}")
-print(f"TOTAL: Bs. {total:.2f}")</textarea>
- <div class="output-area">
- <div class="output-label">▸ Salida del programa</div>
- <div class="output-text"></div>
- </div>
- </div>
- </div>
+print(f"Subtotal:   Bs. {subtotal:.2f}")
+print(f"Descuento:  Bs. {ahorro:.2f}")
+print(f"TOTAL:      Bs. {total:.2f}")</textarea>
+        <div class="output-area">
+          <div class="output-label">▸ Salida del programa</div>
+          <div class="output-text"></div>
+        </div>
+      </div>
+    </div>
 
- <div class="divider"></div>
+    <div class="divider"></div>
 
- <p class="module-tag">Convenciones de nombres</p>
- <p class="section-lead" style="margin-top:12px;">
- Python tiene reglas estrictas y convenciones de estilo para nombrar variables.
- Seguirlas hace tu código más legible y compatible con el ecosistema Python (PEP 8).
- </p>
+    <p class="module-tag">Convenciones de nombres</p>
+    <p class="section-lead" style="margin-top:12px;">
+      Python tiene reglas estrictas y convenciones de estilo para nombrar variables.
+      Seguirlas hace tu código más legible y compatible con el ecosistema Python (PEP 8).
+    </p>
 
- <div class="rules-grid">
- <div class="rule-box ok">
- <div class="rule-head"> VÁLIDO</div>
- <div class="rule-item"><span>nombre</span> — letras en minúscula</div>
- <div class="rule-item"><span>mi_variable</span> — snake_case</div>
- <div class="rule-item"><span>edad2</span> — número al final</div>
- <div class="rule-item"><span>_privado</span> — guión bajo inicial</div>
- <div class="rule-item"><span>CONSTANTE</span> — convención mayúsc.</div>
- </div>
- <div class="rule-box bad">
- <div class="rule-head"> INVÁLIDO</div>
- <div class="rule-item"><span>2edad</span> — empieza con número</div>
- <div class="rule-item"><span>mi variable</span> — espacio no permitido</div>
- <div class="rule-item"><span>for</span> — es palabra reservada</div>
- <div class="rule-item"><span>mi-var</span> — guión medio no válido</div>
- <div class="rule-item"><span>print</span> — nombre de función builtin</div>
- </div>
- </div>
+    <div class="rules-grid">
+      <div class="rule-box ok">
+        <div class="rule-head"> VÁLIDO</div>
+        <div class="rule-item"><span>nombre</span> — letras en minúscula</div>
+        <div class="rule-item"><span>mi_variable</span> — snake_case</div>
+        <div class="rule-item"><span>edad2</span> — número al final</div>
+        <div class="rule-item"><span>_privado</span> — guión bajo inicial</div>
+        <div class="rule-item"><span>CONSTANTE</span> — convención mayúsc.</div>
+      </div>
+      <div class="rule-box bad">
+        <div class="rule-head"> INVÁLIDO</div>
+        <div class="rule-item"><span>2edad</span> — empieza con número</div>
+        <div class="rule-item"><span>mi variable</span> — espacio no permitido</div>
+        <div class="rule-item"><span>for</span> — es palabra reservada</div>
+        <div class="rule-item"><span>mi-var</span> — guión medio no válido</div>
+        <div class="rule-item"><span>print</span> — nombre de función builtin</div>
+      </div>
+    </div>
 
- <div class="quiz-card" id="quiz2">
- <div class="quiz-badge"> Mini Reto</div>
- <div class="quiz-q">¿Qué valor tendrá <code>x</code> al final?<br><br>
- <span style="font-family:var(--mono); color:var(--accent-bright); font-size:14px;">x = 10<br>x = x * 2<br>x += 5</span>
- </div>
- <div class="quiz-opts">
- <div class="quiz-opt" onclick="answer(this, false, 'quiz2')"><div class="quiz-letter">A</div><span>10</span></div>
- <div class="quiz-opt" onclick="answer(this, false, 'quiz2')"><div class="quiz-letter">B</div><span>20</span></div>
- <div class="quiz-opt" onclick="answer(this, true, 'quiz2')"><div class="quiz-letter">C</div><span>25</span></div>
- <div class="quiz-opt" onclick="answer(this, false, 'quiz2')"><div class="quiz-letter">D</div><span>15</span></div>
- </div>
- <div class="quiz-fb" id="quiz2-fb"></div>
- </div>
+    <div class="quiz-card" id="quiz2">
+      <div class="quiz-badge"> Mini Reto</div>
+      <div class="quiz-q">¿Qué valor tendrá <code>x</code> al final?<br><br>
+        <span style="font-family:var(--mono); color:var(--accent-bright); font-size:14px;">x = 10<br>x = x * 2<br>x += 5</span>
+      </div>
+      <div class="quiz-opts">
+        <div class="quiz-opt" onclick="answer(this, false, 'quiz2')"><div class="quiz-letter">A</div><span>10</span></div>
+        <div class="quiz-opt" onclick="answer(this, false, 'quiz2')"><div class="quiz-letter">B</div><span>20</span></div>
+        <div class="quiz-opt" onclick="answer(this, true, 'quiz2')"><div class="quiz-letter">C</div><span>25</span></div>
+        <div class="quiz-opt" onclick="answer(this, false, 'quiz2')"><div class="quiz-letter">D</div><span>15</span></div>
+      </div>
+      <div class="quiz-fb" id="quiz2-fb"></div>
+    </div>
 
- </section>
+  </section>
 
- <!-- ════ SECCIÓN 3: CONDICIONALES ════ -->
- <section id="sec-cond" class="section">
+  <!-- ════ SECCIÓN 3: CONDICIONALES ════ -->
+  <section id="sec-cond" class="section">
 
- <div class="module-tag">Módulo 03</div>
- <h2 class="section-h2">Condicionales:<br>tomar decisiones</h2>
- <p class="section-lead">
- Los condicionales permiten que tu programa <span class="hl">tome caminos distintos</span>
- según si una condición es verdadera o falsa. Son el mecanismo con el que el código
- "piensa" y reacciona ante diferentes situaciones.
- </p>
+    <div class="module-tag">Módulo 03</div>
+    <h2 class="section-h2">Condicionales:<br>tomar decisiones</h2>
+    <p class="section-lead">
+      Los condicionales permiten que tu programa <span class="hl">tome caminos distintos</span>
+      según si una condición es verdadera o falsa. Son el mecanismo con el que el código
+      "piensa" y reacciona ante diferentes situaciones.
+    </p>
 
- <div class="info-grid">
- <div class="info-card">
- <div class="info-card-icon"></div>
- <div class="info-card-title">if — Si esto ocurre</div>
- <div class="info-card-desc">Ejecuta un bloque de código <strong>solo si</strong> la condición es <code>True</code>. Si es <code>False</code>, el bloque se omite completamente.</div>
- </div>
- <div class="info-card">
- <div class="info-card-icon">↔</div>
- <div class="info-card-title">else — De lo contrario</div>
- <div class="info-card-desc">Se ejecuta cuando la condición del <code>if</code> es <code>False</code>. Es el camino alternativo: <strong>o uno u otro</strong>, nunca ambos.</div>
- </div>
- <div class="info-card">
- <div class="info-card-icon"></div>
- <div class="info-card-title">elif — Si no, si...</div>
- <div class="info-card-desc">Permite encadenar varias condiciones. Se evalúan <strong>en orden</strong>; se ejecuta solo la primera que resulte verdadera.</div>
- </div>
- <div class="info-card">
- <div class="info-card-icon"></div>
- <div class="info-card-title">Operadores de comparación</div>
- <div class="info-card-desc"><code>==</code> igual · <code>!=</code> distinto · <code>&gt;</code> mayor · <code>&lt;</code> menor · <code>&gt;=</code> mayor o igual · <code>&lt;=</code> menor o igual.</div>
- </div>
- </div>
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="info-card-icon"></div>
+        <div class="info-card-title">if — Si esto ocurre</div>
+        <div class="info-card-desc">Ejecuta un bloque de código <strong>solo si</strong> la condición es <code>True</code>. Si es <code>False</code>, el bloque se omite completamente.</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon">↔</div>
+        <div class="info-card-title">else — De lo contrario</div>
+        <div class="info-card-desc">Se ejecuta cuando la condición del <code>if</code> es <code>False</code>. Es el camino alternativo: <strong>o uno u otro</strong>, nunca ambos.</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon"></div>
+        <div class="info-card-title">elif — Si no, si...</div>
+        <div class="info-card-desc">Permite encadenar varias condiciones. Se evalúan <strong>en orden</strong>; se ejecuta solo la primera que resulte verdadera.</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon"></div>
+        <div class="info-card-title">Operadores de comparación</div>
+        <div class="info-card-desc"><code>==</code> igual · <code>!=</code> distinto · <code>&gt;</code> mayor · <code>&lt;</code> menor · <code>&gt;=</code> mayor o igual · <code>&lt;=</code> menor o igual.</div>
+      </div>
+    </div>
 
- <!-- FLOWCHART -->
- <div class="flowchart">
- <div class="flowchart-title">▸ Flujo de ejecución — if / elif / else</div>
- <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
- <div class="fc-node fc-start">Inicio del programa</div>
- <div class="fc-arrow">↓</div>
- <div class="fc-node fc-cond">¿Condición if?</div>
- <div style="display:flex; gap:32px; align-items:flex-start; margin:4px 0;">
- <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
- <div class="fc-label">Verdadero </div>
- <div class="fc-arrow">↓</div>
- <div class="fc-node fc-action">Bloque if</div>
- </div>
- <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
- <div class="fc-label">Falso </div>
- <div class="fc-arrow">↓</div>
- <div class="fc-node fc-cond">¿Condición elif?</div>
- <div style="display:flex; gap:24px; align-items:flex-start; margin:4px 0;">
- <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
- <div class="fc-label">Verdadero </div>
- <div class="fc-arrow">↓</div>
- <div class="fc-node fc-action">Bloque elif</div>
- </div>
- <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
- <div class="fc-label">Falso </div>
- <div class="fc-arrow">↓</div>
- <div class="fc-node fc-else">Bloque else</div>
- </div>
- </div>
- </div>
- </div>
- <div class="fc-arrow">↓</div>
- <div class="fc-node fc-end">Continúa el programa</div>
- </div>
- </div>
+    <!-- FLOWCHART -->
+    <div class="flowchart">
+      <div class="flowchart-title">▸ Flujo de ejecución — if / elif / else</div>
+      <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
+        <div class="fc-node fc-start">Inicio del programa</div>
+        <div class="fc-arrow">↓</div>
+        <div class="fc-node fc-cond">¿Condición if?</div>
+        <div style="display:flex; gap:32px; align-items:flex-start; margin:4px 0;">
+          <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
+            <div class="fc-label">Verdadero </div>
+            <div class="fc-arrow">↓</div>
+            <div class="fc-node fc-action">Bloque if</div>
+          </div>
+          <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
+            <div class="fc-label">Falso </div>
+            <div class="fc-arrow">↓</div>
+            <div class="fc-node fc-cond">¿Condición elif?</div>
+            <div style="display:flex; gap:24px; align-items:flex-start; margin:4px 0;">
+              <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
+                <div class="fc-label">Verdadero </div>
+                <div class="fc-arrow">↓</div>
+                <div class="fc-node fc-action">Bloque elif</div>
+              </div>
+              <div style="display:flex; flex-direction:column; align-items:center; gap:4px;">
+                <div class="fc-label">Falso </div>
+                <div class="fc-arrow">↓</div>
+                <div class="fc-node fc-else">Bloque else</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="fc-arrow">↓</div>
+        <div class="fc-node fc-end">Continúa el programa</div>
+      </div>
+    </div>
 
- <div class="concept-card">
- <div class="concept-header">
- <div class="concept-icon ci-yellow"></div>
- <div class="concept-meta">
- <div class="concept-title">if simple y if / else</div>
- <div class="concept-sub">El camino más básico: ejecutar algo o no ejecutarlo</div>
- </div>
- </div>
- <div class="playground">
- <div class="play-toolbar">
- <div class="dots"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div></div>
- <div class="toolbar-right">
- <span class="lang-tag">Python 3</span>
- <button class="run-btn" onclick="runCode(this)">▶ Ejecutar</button>
- </div>
- </div>
- <textarea class="code-area" rows="14">edad = 17
+    <div class="concept-card">
+      <div class="concept-header">
+        <div class="concept-icon ci-yellow"></div>
+        <div class="concept-meta">
+          <div class="concept-title">if simple y if / else</div>
+          <div class="concept-sub">El camino más básico: ejecutar algo o no ejecutarlo</div>
+        </div>
+      </div>
+      <div class="playground">
+        <div class="play-toolbar">
+          <div class="dots"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div></div>
+          <div class="toolbar-right">
+            <span class="lang-tag">Python 3</span>
+            <button class="run-btn" onclick="runCode(this)">▶ Ejecutar</button>
+          </div>
+        </div>
+        <textarea class="code-area" rows="14">edad = 17
 
 if edad >= 18:
- print("Eres mayor de edad.")
- print("Puedes votar en las elecciones.")
+    print("Eres mayor de edad.")
+    print("Puedes votar en las elecciones.")
 else:
- print("Eres menor de edad.")
- print("Aún no puedes votar.")
+    print("Eres menor de edad.")
+    print("Aún no puedes votar.")
 
 temperatura = 35
 
 if temperatura > 30:
- print("Hace calor, lleva agua.")
+    print("Hace calor, lleva agua.")
 else:
- print("La temperatura es agradable.")</textarea>
- <div class="output-area">
- <div class="output-label">▸ Salida del programa</div>
- <div class="output-text"></div>
- </div>
- </div>
- </div>
+    print("La temperatura es agradable.")</textarea>
+        <div class="output-area">
+          <div class="output-label">▸ Salida del programa</div>
+          <div class="output-text"></div>
+        </div>
+      </div>
+    </div>
 
- <div class="explain-block">
- <span class="emoji"></span>
- <p>En Python, la <strong>indentación</strong> (4 espacios o 1 Tab) define qué código
- pertenece a cada bloque. Todo lo que va <strong>dentro del if</strong> debe estar
- indentado. Si quitas los espacios, Python lanzará un <strong>IndentationError</strong>.
- Prueba cambiar <strong>edad = 17</strong> por <strong>edad = 20</strong> y vuelve a ejecutar.</p>
- </div>
+    <div class="explain-block">
+      <span class="emoji"></span>
+      <p>En Python, la <strong>indentación</strong> (4 espacios o 1 Tab) define qué código
+      pertenece a cada bloque. Todo lo que va <strong>dentro del if</strong> debe estar
+      indentado. Si quitas los espacios, Python lanzará un <strong>IndentationError</strong>.
+      Prueba cambiar <strong>edad = 17</strong> por <strong>edad = 20</strong> y vuelve a ejecutar.</p>
+    </div>
 
- <div class="concept-card">
- <div class="concept-header">
- <div class="concept-icon ci-purple"></div>
- <div class="concept-meta">
- <div class="concept-title">if / elif / else — múltiples ramas</div>
- <div class="concept-sub">Evalúa varias condiciones en cadena hasta encontrar la primera verdadera</div>
- </div>
- </div>
- <div class="playground">
- <div class="play-toolbar">
- <div class="dots"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div></div>
- <div class="toolbar-right">
- <span class="lang-tag">Python 3</span>
- <button class="run-btn" onclick="runCode(this)">▶ Ejecutar</button>
- </div>
- </div>
- <textarea class="code-area" rows="15">nota = 72
+    <div class="concept-card">
+      <div class="concept-header">
+        <div class="concept-icon ci-purple"></div>
+        <div class="concept-meta">
+          <div class="concept-title">if / elif / else — múltiples ramas</div>
+          <div class="concept-sub">Evalúa varias condiciones en cadena hasta encontrar la primera verdadera</div>
+        </div>
+      </div>
+      <div class="playground">
+        <div class="play-toolbar">
+          <div class="dots"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div></div>
+          <div class="toolbar-right">
+            <span class="lang-tag">Python 3</span>
+            <button class="run-btn" onclick="runCode(this)">▶ Ejecutar</button>
+          </div>
+        </div>
+        <textarea class="code-area" rows="15">nota = 72
 
 if nota >= 90:
- calificacion = "A — Excelente"
+    calificacion = "A — Excelente"
 elif nota >= 80:
- calificacion = "B — Muy bueno"
+    calificacion = "B — Muy bueno"
 elif nota >= 70:
- calificacion = "C — Bueno"
+    calificacion = "C — Bueno"
 elif nota >= 60:
- calificacion = "D — Suficiente"
+    calificacion = "D — Suficiente"
 else:
- calificacion = "F — Reprobado"
+    calificacion = "F — Reprobado"
 
 print(f"Nota: {nota}/100")
 print(f"Calificación: {calificacion}")</textarea>
- <div class="output-area">
- <div class="output-label">▸ Salida del programa</div>
- <div class="output-text"></div>
- </div>
- </div>
- </div>
+        <div class="output-area">
+          <div class="output-label">▸ Salida del programa</div>
+          <div class="output-text"></div>
+        </div>
+      </div>
+    </div>
 
- <div class="explain-block">
- <span class="emoji"></span>
- <p>Python evalúa los <strong>elif</strong> de arriba hacia abajo y se detiene en el primero
- que sea <strong>True</strong>. Por eso el orden importa: si pusieras <code>nota >= 60</code>
- primero, capturaría todos los casos y los <code>elif</code> siguientes nunca se ejecutarían.
- Prueba cambiar <strong>nota = 72</strong> por otros valores como 85, 95 o 45.</p>
- </div>
+    <div class="explain-block">
+      <span class="emoji"></span>
+      <p>Python evalúa los <strong>elif</strong> de arriba hacia abajo y se detiene en el primero
+      que sea <strong>True</strong>. Por eso el orden importa: si pusieras <code>nota >= 60</code>
+      primero, capturaría todos los casos y los <code>elif</code> siguientes nunca se ejecutarían.
+      Prueba cambiar <strong>nota = 72</strong> por otros valores como 85, 95 o 45.</p>
+    </div>
 
- <div class="concept-card">
- <div class="concept-header">
- <div class="concept-icon ci-green"></div>
- <div class="concept-meta">
- <div class="concept-title">Operadores lógicos: and, or, not</div>
- <div class="concept-sub">Combina varias condiciones en una sola expresión</div>
- </div>
- </div>
- <div class="playground">
- <div class="play-toolbar">
- <div class="dots"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div></div>
- <div class="toolbar-right">
- <span class="lang-tag">Python 3</span>
- <button class="run-btn" onclick="runCode(this)">▶ Ejecutar</button>
- </div>
- </div>
- <textarea class="code-area" rows="18">usuario = "admin"
+    <div class="concept-card">
+      <div class="concept-header">
+        <div class="concept-icon ci-green"></div>
+        <div class="concept-meta">
+          <div class="concept-title">Operadores lógicos: and, or, not</div>
+          <div class="concept-sub">Combina varias condiciones en una sola expresión</div>
+        </div>
+      </div>
+      <div class="playground">
+        <div class="play-toolbar">
+          <div class="dots"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div></div>
+          <div class="toolbar-right">
+            <span class="lang-tag">Python 3</span>
+            <button class="run-btn" onclick="runCode(this)">▶ Ejecutar</button>
+          </div>
+        </div>
+        <textarea class="code-area" rows="18">usuario = "admin"
 contrasena = "1234"
 esta_activo = True
 
 if usuario == "admin" and contrasena == "1234":
- print("Credenciales correctas.")
+    print("Credenciales correctas.")
 else:
- print("Usuario o contraseña incorrectos.")
+    print("Usuario o contraseña incorrectos.")
 
 if not esta_activo:
- print("Cuenta desactivada.")
+    print("Cuenta desactivada.")
 else:
- print("Cuenta activa.")
+    print("Cuenta activa.")
 
 hora = 14
 
 if hora < 12 or hora >= 20:
- print("Fuera del horario de atención.")
+    print("Fuera del horario de atención.")
 else:
- print(f"Estamos abiertos. Son las {hora}:00.")</textarea>
- <div class="output-area">
- <div class="output-label">▸ Salida del programa</div>
- <div class="output-text"></div>
- </div>
- </div>
- </div>
+    print(f"Estamos abiertos. Son las {hora}:00.")</textarea>
+        <div class="output-area">
+          <div class="output-label">▸ Salida del programa</div>
+          <div class="output-text"></div>
+        </div>
+      </div>
+    </div>
 
- <div class="explain-block">
- <span class="emoji"></span>
- <p><strong>and</strong> requiere que <strong>ambas</strong> condiciones sean True.
- <strong>or</strong> requiere que <strong>al menos una</strong> sea True.
- <strong>not</strong> invierte el valor: si algo es True, lo convierte en False y viceversa.
- Puedes combinarlos con paréntesis para condiciones más complejas.</p>
- </div>
+    <div class="explain-block">
+      <span class="emoji"></span>
+      <p><strong>and</strong> requiere que <strong>ambas</strong> condiciones sean True.
+      <strong>or</strong> requiere que <strong>al menos una</strong> sea True.
+      <strong>not</strong> invierte el valor: si algo es True, lo convierte en False y viceversa.
+      Puedes combinarlos con paréntesis para condiciones más complejas.</p>
+    </div>
 
- <div class="concept-card">
- <div class="concept-header">
- <div class="concept-icon ci-cyan"></div>
- <div class="concept-meta">
- <div class="concept-title">Condicional en una línea (ternario)</div>
- <div class="concept-sub">Sintaxis compacta para decisiones simples dentro de expresiones</div>
- </div>
- </div>
- <div class="playground">
- <div class="play-toolbar">
- <div class="dots"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div></div>
- <div class="toolbar-right">
- <span class="lang-tag">Python 3</span>
- <button class="run-btn" onclick="runCode(this)">▶ Ejecutar</button>
- </div>
- </div>
- <textarea class="code-area" rows="10">edad = 20
+    <div class="concept-card">
+      <div class="concept-header">
+        <div class="concept-icon ci-cyan"></div>
+        <div class="concept-meta">
+          <div class="concept-title">Condicional en una línea (ternario)</div>
+          <div class="concept-sub">Sintaxis compacta para decisiones simples dentro de expresiones</div>
+        </div>
+      </div>
+      <div class="playground">
+        <div class="play-toolbar">
+          <div class="dots"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div></div>
+          <div class="toolbar-right">
+            <span class="lang-tag">Python 3</span>
+            <button class="run-btn" onclick="runCode(this)">▶ Ejecutar</button>
+          </div>
+        </div>
+        <textarea class="code-area" rows="10">edad = 20
 estado = "mayor" if edad >= 18 else "menor"
 print(f"Es {estado} de edad.")
 
@@ -983,529 +983,529 @@ precio = 100
 descuento = 0.20 if precio > 50 else 0.05
 print(f"Descuento aplicado: {descuento * 100:.0f}%")
 print(f"Precio final: Bs. {precio * (1 - descuento):.2f}")</textarea>
- <div class="output-area">
- <div class="output-label">▸ Salida del programa</div>
- <div class="output-text"></div>
- </div>
- </div>
- </div>
+        <div class="output-area">
+          <div class="output-label">▸ Salida del programa</div>
+          <div class="output-text"></div>
+        </div>
+      </div>
+    </div>
 
- <div class="explain-block">
- <span class="emoji"></span>
- <p>La sintaxis es: <strong>valor_si_true if condición else valor_si_false</strong>.
- Es útil para asignaciones simples en una sola línea. Sin embargo, para condiciones
- complejas es mejor el <strong>if/else</strong> normal: la legibilidad es más importante
- que la brevedad.</p>
- </div>
+    <div class="explain-block">
+      <span class="emoji"></span>
+      <p>La sintaxis es: <strong>valor_si_true if condición else valor_si_false</strong>.
+      Es útil para asignaciones simples en una sola línea. Sin embargo, para condiciones
+      complejas es mejor el <strong>if/else</strong> normal: la legibilidad es más importante
+      que la brevedad.</p>
+    </div>
 
- <div class="quiz-card" id="quiz3">
- <div class="quiz-badge"> Mini Reto</div>
- <div class="quiz-q">¿Qué imprime este código?<br><br>
- <span style="font-family:var(--mono); color:var(--accent-bright); font-size:13px; line-height:2;">x = 15<br>if x > 20:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("grande")<br>elif x > 10:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("mediano")<br>else:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("pequeño")</span>
- </div>
- <div class="quiz-opts">
- <div class="quiz-opt" onclick="answer(this, false, 'quiz3')"><div class="quiz-letter">A</div><span>grande</span></div>
- <div class="quiz-opt" onclick="answer(this, true, 'quiz3')"><div class="quiz-letter">B</div><span>mediano</span></div>
- <div class="quiz-opt" onclick="answer(this, false, 'quiz3')"><div class="quiz-letter">C</div><span>pequeño</span></div>
- <div class="quiz-opt" onclick="answer(this, false, 'quiz3')"><div class="quiz-letter">D</div><span>grande y mediano</span></div>
- </div>
- <div class="quiz-fb" id="quiz3-fb"></div>
- </div>
+    <div class="quiz-card" id="quiz3">
+      <div class="quiz-badge"> Mini Reto</div>
+      <div class="quiz-q">¿Qué imprime este código?<br><br>
+        <span style="font-family:var(--mono); color:var(--accent-bright); font-size:13px; line-height:2;">x = 15<br>if x > 20:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("grande")<br>elif x > 10:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("mediano")<br>else:<br>&nbsp;&nbsp;&nbsp;&nbsp;print("pequeño")</span>
+      </div>
+      <div class="quiz-opts">
+        <div class="quiz-opt" onclick="answer(this, false, 'quiz3')"><div class="quiz-letter">A</div><span>grande</span></div>
+        <div class="quiz-opt" onclick="answer(this, true, 'quiz3')"><div class="quiz-letter">B</div><span>mediano</span></div>
+        <div class="quiz-opt" onclick="answer(this, false, 'quiz3')"><div class="quiz-letter">C</div><span>pequeño</span></div>
+        <div class="quiz-opt" onclick="answer(this, false, 'quiz3')"><div class="quiz-letter">D</div><span>grande y mediano</span></div>
+      </div>
+      <div class="quiz-fb" id="quiz3-fb"></div>
+    </div>
 
- </section>
+  </section>
 
- <!-- ════ SECCIÓN 4: CICLOS ════ -->
- <section id="sec-loops" class="section">
+  <!-- ════ SECCIÓN 4: CICLOS ════ -->
+  <section id="sec-loops" class="section">
 
- <div class="module-tag">Módulo 04</div>
- <h2 class="section-h2">Ciclos:<br>repetir acciones</h2>
- <p class="section-lead">
- Los ciclos permiten <span class="hl">ejecutar un bloque de código múltiples veces</span>
- sin tener que escribirlo repetidamente. Son la herramienta fundamental para procesar
- colecciones de datos y automatizar tareas repetitivas.
- </p>
+    <div class="module-tag">Módulo 04</div>
+    <h2 class="section-h2">Ciclos:<br>repetir acciones</h2>
+    <p class="section-lead">
+      Los ciclos permiten <span class="hl">ejecutar un bloque de código múltiples veces</span>
+      sin tener que escribirlo repetidamente. Son la herramienta fundamental para procesar
+      colecciones de datos y automatizar tareas repetitivas.
+    </p>
 
- <div class="info-grid">
- <div class="info-card">
- <div class="info-card-icon"></div>
- <div class="info-card-title">for — Para cada elemento</div>
- <div class="info-card-desc">Itera sobre una <strong>secuencia</strong> (lista, rango, string). Ideal cuando sabes de antemano cuántas veces repetir.</div>
- </div>
- <div class="info-card">
- <div class="info-card-icon"></div>
- <div class="info-card-title">while — Mientras se cumpla</div>
- <div class="info-card-desc">Repite mientras una condición sea <code>True</code>. Ideal cuando no sabes cuántas iteraciones necesitarás.</div>
- </div>
- <div class="info-card">
- <div class="info-card-icon"></div>
- <div class="info-card-title">break — Salir del ciclo</div>
- <div class="info-card-desc">Detiene el ciclo inmediatamente, sin importar si quedan más iteraciones. Sale del bucle actual por completo.</div>
- </div>
- <div class="info-card">
- <div class="info-card-icon"></div>
- <div class="info-card-title">continue — Saltar iteración</div>
- <div class="info-card-desc">Salta al inicio de la siguiente iteración, ignorando el resto del código en la iteración actual.</div>
- </div>
- </div>
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="info-card-icon"></div>
+        <div class="info-card-title">for — Para cada elemento</div>
+        <div class="info-card-desc">Itera sobre una <strong>secuencia</strong> (lista, rango, string). Ideal cuando sabes de antemano cuántas veces repetir.</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon"></div>
+        <div class="info-card-title">while — Mientras se cumpla</div>
+        <div class="info-card-desc">Repite mientras una condición sea <code>True</code>. Ideal cuando no sabes cuántas iteraciones necesitarás.</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon"></div>
+        <div class="info-card-title">break — Salir del ciclo</div>
+        <div class="info-card-desc">Detiene el ciclo inmediatamente, sin importar si quedan más iteraciones. Sale del bucle actual por completo.</div>
+      </div>
+      <div class="info-card">
+        <div class="info-card-icon"></div>
+        <div class="info-card-title">continue — Saltar iteración</div>
+        <div class="info-card-desc">Salta al inicio de la siguiente iteración, ignorando el resto del código en la iteración actual.</div>
+      </div>
+    </div>
 
- <!-- LOOP VISUALIZER -->
- <div class="loop-vis">
- <div class="loop-vis-title"> Visualizador de Ciclo for</div>
- <p class="loop-vis-sub">Configura el rango y observa cómo itera paso a paso · for i in range(inicio, fin)</p>
- <div class="loop-controls">
- <span class="loop-label">inicio:</span>
- <input class="loop-input" id="loop-start" type="number" value="1" min="0" max="20">
- <span class="loop-label">fin:</span>
- <input class="loop-input" id="loop-end" type="number" value="6" min="1" max="20">
- <button class="loop-btn" onclick="animateLoop()">▶ Animar</button>
- </div>
- <div class="loop-track" id="loop-track"></div>
- <div id="loop-status" style="font-family:var(--mono); font-size:12px; color:var(--text-muted); margin-top:14px;"></div>
- </div>
+    <!-- LOOP VISUALIZER -->
+    <div class="loop-vis">
+      <div class="loop-vis-title"> Visualizador de Ciclo for</div>
+      <p class="loop-vis-sub">Configura el rango y observa cómo itera paso a paso · for i in range(inicio, fin)</p>
+      <div class="loop-controls">
+        <span class="loop-label">inicio:</span>
+        <input class="loop-input" id="loop-start" type="number" value="1" min="0" max="20">
+        <span class="loop-label">fin:</span>
+        <input class="loop-input" id="loop-end" type="number" value="6" min="1" max="20">
+        <button class="loop-btn" onclick="animateLoop()">▶ Animar</button>
+      </div>
+      <div class="loop-track" id="loop-track"></div>
+      <div id="loop-status" style="font-family:var(--mono); font-size:12px; color:var(--text-muted); margin-top:14px;"></div>
+    </div>
 
- <div class="concept-card">
- <div class="concept-header">
- <div class="concept-icon ci-purple"></div>
- <div class="concept-meta">
- <div class="concept-title">Ciclo for con range()</div>
- <div class="concept-sub">Repite un bloque un número fijo de veces usando un rango numérico</div>
- </div>
- </div>
- <div class="playground">
- <div class="play-toolbar">
- <div class="dots"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div></div>
- <div class="toolbar-right">
- <span class="lang-tag">Python 3</span>
- <button class="run-btn" onclick="runCode(this)">▶ Ejecutar</button>
- </div>
- </div>
- <textarea class="code-area" rows="15">print("--- Conteo del 1 al 5 ---")
+    <div class="concept-card">
+      <div class="concept-header">
+        <div class="concept-icon ci-purple"></div>
+        <div class="concept-meta">
+          <div class="concept-title">Ciclo for con range()</div>
+          <div class="concept-sub">Repite un bloque un número fijo de veces usando un rango numérico</div>
+        </div>
+      </div>
+      <div class="playground">
+        <div class="play-toolbar">
+          <div class="dots"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div></div>
+          <div class="toolbar-right">
+            <span class="lang-tag">Python 3</span>
+            <button class="run-btn" onclick="runCode(this)">▶ Ejecutar</button>
+          </div>
+        </div>
+        <textarea class="code-area" rows="15">print("--- Conteo del 1 al 5 ---")
 for i in range(1, 6):
- print(f" Vuelta {i}")
+    print(f"  Vuelta {i}")
 
 print("\n--- Tabla de multiplicar del 3 ---")
 for numero in range(1, 11):
- resultado = 3 * numero
- print(f" 3 x {numero:2} = {resultado}")
+    resultado = 3 * numero
+    print(f"  3 x {numero:2} = {resultado}")
 
 print("\n--- Solo los pares del 0 al 10 ---")
 for n in range(0, 11, 2):
- print(f" {n}", end=" ")
+    print(f"  {n}", end=" ")
 print()</textarea>
- <div class="output-area">
- <div class="output-label">▸ Salida del programa</div>
- <div class="output-text"></div>
- </div>
- </div>
- </div>
+        <div class="output-area">
+          <div class="output-label">▸ Salida del programa</div>
+          <div class="output-text"></div>
+        </div>
+      </div>
+    </div>
 
- <div class="explain-block">
- <span class="emoji"></span>
- <p><strong>range(inicio, fin)</strong> genera números desde <strong>inicio</strong> hasta
- <strong>fin - 1</strong> (el fin no se incluye). <strong>range(0, 11, 2)</strong> agrega
- un tercer argumento: el <strong>paso</strong>, que indica de cuánto en cuánto avanzar.
- La variable <strong>i</strong> (o cualquier nombre que elijas) toma cada valor en cada vuelta.</p>
- </div>
+    <div class="explain-block">
+      <span class="emoji"></span>
+      <p><strong>range(inicio, fin)</strong> genera números desde <strong>inicio</strong> hasta
+      <strong>fin - 1</strong> (el fin no se incluye). <strong>range(0, 11, 2)</strong> agrega
+      un tercer argumento: el <strong>paso</strong>, que indica de cuánto en cuánto avanzar.
+      La variable <strong>i</strong> (o cualquier nombre que elijas) toma cada valor en cada vuelta.</p>
+    </div>
 
- <div class="concept-card">
- <div class="concept-header">
- <div class="concept-icon ci-pink"></div>
- <div class="concept-meta">
- <div class="concept-title">for sobre listas y strings</div>
- <div class="concept-sub">Itera directamente sobre colecciones de datos sin necesitar índices</div>
- </div>
- </div>
- <div class="playground">
- <div class="play-toolbar">
- <div class="dots"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div></div>
- <div class="toolbar-right">
- <span class="lang-tag">Python 3</span>
- <button class="run-btn" onclick="runCode(this)">▶ Ejecutar</button>
- </div>
- </div>
- <textarea class="code-area" rows="16">frutas = ["manzana", "banana", "pera", "uva"]
+    <div class="concept-card">
+      <div class="concept-header">
+        <div class="concept-icon ci-pink"></div>
+        <div class="concept-meta">
+          <div class="concept-title">for sobre listas y strings</div>
+          <div class="concept-sub">Itera directamente sobre colecciones de datos sin necesitar índices</div>
+        </div>
+      </div>
+      <div class="playground">
+        <div class="play-toolbar">
+          <div class="dots"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div></div>
+          <div class="toolbar-right">
+            <span class="lang-tag">Python 3</span>
+            <button class="run-btn" onclick="runCode(this)">▶ Ejecutar</button>
+          </div>
+        </div>
+        <textarea class="code-area" rows="16">frutas = ["manzana", "banana", "pera", "uva"]
 
 print("--- Frutas disponibles ---")
 for fruta in frutas:
- print(f" {fruta.capitalize()}")
+    print(f"   {fruta.capitalize()}")
 
 print("\n--- Letras de una palabra ---")
 palabra = "Python"
 for letra in palabra:
- print(letra, end="-")
+    print(letra, end="-")
 print()
 
 print("\n--- Suma de una lista ---")
 numeros = [10, 25, 7, 42, 3]
 total = 0
 for n in numeros:
- total += n
+    total += n
 print(f"La suma es: {total}")</textarea>
- <div class="output-area">
- <div class="output-label">▸ Salida del programa</div>
- <div class="output-text"></div>
- </div>
- </div>
- </div>
+        <div class="output-area">
+          <div class="output-label">▸ Salida del programa</div>
+          <div class="output-text"></div>
+        </div>
+      </div>
+    </div>
 
- <div class="explain-block">
- <span class="emoji"></span>
- <p>En Python, un <strong>for</strong> puede iterar sobre cualquier objeto <em>iterable</em>:
- listas <code>[]</code>, strings, tuplas <code>()</code>, y más. La variable <strong>fruta</strong>
- toma el valor de cada elemento en cada vuelta. No necesitas índices ni <code>range(len(lista))</code>
- a menos que necesites el número de posición.</p>
- </div>
+    <div class="explain-block">
+      <span class="emoji"></span>
+      <p>En Python, un <strong>for</strong> puede iterar sobre cualquier objeto <em>iterable</em>:
+      listas <code>[]</code>, strings, tuplas <code>()</code>, y más. La variable <strong>fruta</strong>
+      toma el valor de cada elemento en cada vuelta. No necesitas índices ni <code>range(len(lista))</code>
+      a menos que necesites el número de posición.</p>
+    </div>
 
- <div class="concept-card">
- <div class="concept-header">
- <div class="concept-icon ci-green"></div>
- <div class="concept-meta">
- <div class="concept-title">Ciclo while</div>
- <div class="concept-sub">Repite mientras la condición sea verdadera — ideal para menús y validaciones</div>
- </div>
- </div>
- <div class="playground">
- <div class="play-toolbar">
- <div class="dots"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div></div>
- <div class="toolbar-right">
- <span class="lang-tag">Python 3</span>
- <button class="run-btn" onclick="runCode(this)">▶ Ejecutar</button>
- </div>
- </div>
- <textarea class="code-area" rows="16">print("--- Cuenta regresiva ---")
+    <div class="concept-card">
+      <div class="concept-header">
+        <div class="concept-icon ci-green"></div>
+        <div class="concept-meta">
+          <div class="concept-title">Ciclo while</div>
+          <div class="concept-sub">Repite mientras la condición sea verdadera — ideal para menús y validaciones</div>
+        </div>
+      </div>
+      <div class="playground">
+        <div class="play-toolbar">
+          <div class="dots"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div></div>
+          <div class="toolbar-right">
+            <span class="lang-tag">Python 3</span>
+            <button class="run-btn" onclick="runCode(this)">▶ Ejecutar</button>
+          </div>
+        </div>
+        <textarea class="code-area" rows="16">print("--- Cuenta regresiva ---")
 contador = 5
 while contador > 0:
- print(f" {contador}...")
- contador -= 1
-print(" ¡Despegue! ")
+    print(f"  {contador}...")
+    contador -= 1
+print("  ¡Despegue!")
 
 print("\n--- Duplicar hasta superar 100 ---")
 valor = 1
 pasos = 0
 while valor <= 100:
- valor = valor * 2
- pasos += 1
-print(f" Valor final: {valor}")
-print(f" Duplicaciones necesarias: {pasos}")</textarea>
- <div class="output-area">
- <div class="output-label">▸ Salida del programa</div>
- <div class="output-text"></div>
- </div>
- </div>
- </div>
+    valor = valor * 2
+    pasos += 1
+print(f"  Valor final: {valor}")
+print(f"  Duplicaciones necesarias: {pasos}")</textarea>
+        <div class="output-area">
+          <div class="output-label">▸ Salida del programa</div>
+          <div class="output-text"></div>
+        </div>
+      </div>
+    </div>
 
- <div class="explain-block">
- <span class="emoji"></span>
- <p>En un <strong>while</strong>, siempre debes asegurarte de que la condición eventualmente
- se vuelva <strong>False</strong>, o tendrás un <strong>bucle infinito</strong>.
- En el primer ejemplo, <code>contador -= 1</code> lo hace decrecer hasta llegar a 0.
- El servidor tiene un timeout de 5 segundos que detiene bucles infinitos automáticamente.</p>
- </div>
+    <div class="explain-block">
+      <span class="emoji"></span>
+      <p>En un <strong>while</strong>, siempre debes asegurarte de que la condición eventualmente
+      se vuelva <strong>False</strong>, o tendrás un <strong>bucle infinito</strong>.
+      En el primer ejemplo, <code>contador -= 1</code> lo hace decrecer hasta llegar a 0.
+      El servidor tiene un timeout de 5 segundos que detiene bucles infinitos automáticamente.</p>
+    </div>
 
- <div class="concept-card">
- <div class="concept-header">
- <div class="concept-icon ci-yellow"></div>
- <div class="concept-meta">
- <div class="concept-title">break y continue</div>
- <div class="concept-sub">Controla el flujo dentro del ciclo: salir o saltar una iteración</div>
- </div>
- </div>
- <div class="playground">
- <div class="play-toolbar">
- <div class="dots"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div></div>
- <div class="toolbar-right">
- <span class="lang-tag">Python 3</span>
- <button class="run-btn" onclick="runCode(this)">▶ Ejecutar</button>
- </div>
- </div>
- <textarea class="code-area" rows="18">print("--- break: buscar el primer par ---")
+    <div class="concept-card">
+      <div class="concept-header">
+        <div class="concept-icon ci-yellow"></div>
+        <div class="concept-meta">
+          <div class="concept-title">break y continue</div>
+          <div class="concept-sub">Controla el flujo dentro del ciclo: salir o saltar una iteración</div>
+        </div>
+      </div>
+      <div class="playground">
+        <div class="play-toolbar">
+          <div class="dots"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div></div>
+          <div class="toolbar-right">
+            <span class="lang-tag">Python 3</span>
+            <button class="run-btn" onclick="runCode(this)">▶ Ejecutar</button>
+          </div>
+        </div>
+        <textarea class="code-area" rows="18">print("--- break: buscar el primer par ---")
 numeros = [3, 7, 1, 4, 9, 6, 2]
 for n in numeros:
- if n % 2 == 0:
- print(f" Primer par encontrado: {n}")
- break
+    if n % 2 == 0:
+        print(f"  Primer par encontrado: {n}")
+        break
 
 print("\n--- continue: omitir múltiplos de 3 ---")
 for i in range(1, 11):
- if i % 3 == 0:
- continue
- print(f" {i}", end=" ")
+    if i % 3 == 0:
+        continue
+    print(f"  {i}", end=" ")
 print()
 
 print("\n--- Combinando if + while + break ---")
 intentos = 0
 max_intentos = 5
 while intentos < max_intentos:
- intentos += 1
- if intentos == 3:
- print(f" Intento {intentos}: ¡Éxito!")
- break
- print(f" Intento {intentos}: fallido")</textarea>
- <div class="output-area">
- <div class="output-label">▸ Salida del programa</div>
- <div class="output-text"></div>
- </div>
- </div>
- </div>
+    intentos += 1
+    if intentos == 3:
+        print(f"  Intento {intentos}: ¡Éxito!")
+        break
+    print(f"  Intento {intentos}: fallido")</textarea>
+        <div class="output-area">
+          <div class="output-label">▸ Salida del programa</div>
+          <div class="output-text"></div>
+        </div>
+      </div>
+    </div>
 
- <div class="explain-block">
- <span class="emoji"></span>
- <p><strong>break</strong> abandona el ciclo completamente al momento de ejecutarse.
- <strong>continue</strong> ignora el resto del cuerpo del ciclo y salta directo a la
- siguiente iteración. El operador <strong>%</strong> (módulo) devuelve el residuo de
- una división: <code>i % 3 == 0</code> es True cuando <code>i</code> es divisible por 3.</p>
- </div>
+    <div class="explain-block">
+      <span class="emoji"></span>
+      <p><strong>break</strong> abandona el ciclo completamente al momento de ejecutarse.
+      <strong>continue</strong> ignora el resto del cuerpo del ciclo y salta directo a la
+      siguiente iteración. El operador <strong>%</strong> (módulo) devuelve el residuo de
+      una división: <code>i % 3 == 0</code> es True cuando <code>i</code> es divisible por 3.</p>
+    </div>
 
- <div class="concept-card">
- <div class="concept-header">
- <div class="concept-icon ci-cyan"></div>
- <div class="concept-meta">
- <div class="concept-title">Ciclos + Condicionales juntos</div>
- <div class="concept-sub">Combina todo lo aprendido para resolver problemas reales</div>
- </div>
- </div>
- <div class="playground">
- <div class="play-toolbar">
- <div class="dots"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div></div>
- <div class="toolbar-right">
- <span class="lang-tag">Python 3</span>
- <button class="run-btn" onclick="runCode(this)">▶ Ejecutar</button>
- </div>
- </div>
- <textarea class="code-area" rows="20">print("=== Clasificador de números ===")
+    <div class="concept-card">
+      <div class="concept-header">
+        <div class="concept-icon ci-cyan"></div>
+        <div class="concept-meta">
+          <div class="concept-title">Ciclos + Condicionales juntos</div>
+          <div class="concept-sub">Combina todo lo aprendido para resolver problemas reales</div>
+        </div>
+      </div>
+      <div class="playground">
+        <div class="play-toolbar">
+          <div class="dots"><div class="dot dot-r"></div><div class="dot dot-y"></div><div class="dot dot-g"></div></div>
+          <div class="toolbar-right">
+            <span class="lang-tag">Python 3</span>
+            <button class="run-btn" onclick="runCode(this)">▶ Ejecutar</button>
+          </div>
+        </div>
+        <textarea class="code-area" rows="20">print("=== Clasificador de números ===")
 numeros = [0, -3, 7, 15, -1, 42, 0, 8]
 positivos = 0
 negativos = 0
 ceros = 0
 
 for n in numeros:
- if n > 0:
- positivos += 1
- elif n < 0:
- negativos += 1
- else:
- ceros += 1
+    if n > 0:
+        positivos += 1
+    elif n < 0:
+        negativos += 1
+    else:
+        ceros += 1
 
 print(f"Positivos: {positivos}")
 print(f"Negativos: {negativos}")
-print(f"Ceros: {ceros}")
+print(f"Ceros:     {ceros}")
 
 print("\n=== FizzBuzz del 1 al 20 ===")
 for i in range(1, 21):
- if i % 15 == 0:
- print("FizzBuzz", end=" ")
- elif i % 3 == 0:
- print("Fizz", end=" ")
- elif i % 5 == 0:
- print("Buzz", end=" ")
- else:
- print(i, end=" ")
+    if i % 15 == 0:
+        print("FizzBuzz", end=" ")
+    elif i % 3 == 0:
+        print("Fizz", end=" ")
+    elif i % 5 == 0:
+        print("Buzz", end=" ")
+    else:
+        print(i, end=" ")
 print()</textarea>
- <div class="output-area">
- <div class="output-label">▸ Salida del programa</div>
- <div class="output-text"></div>
- </div>
- </div>
- </div>
+        <div class="output-area">
+          <div class="output-label">▸ Salida del programa</div>
+          <div class="output-text"></div>
+        </div>
+      </div>
+    </div>
 
- <div class="explain-block">
- <span class="emoji"></span>
- <p><strong>FizzBuzz</strong> es el reto clásico de programación: imprime los números
- del 1 al 20, pero reemplaza los múltiplos de 3 con "Fizz", los de 5 con "Buzz"
- y los de 15 (ambos) con "FizzBuzz". La clave es verificar el caso <code>% 15</code>
- primero, porque si verificaras <code>% 3</code> antes, capturaría también los múltiplos de 15.</p>
- </div>
+    <div class="explain-block">
+      <span class="emoji"></span>
+      <p><strong>FizzBuzz</strong> es el reto clásico de programación: imprime los números
+      del 1 al 20, pero reemplaza los múltiplos de 3 con "Fizz", los de 5 con "Buzz"
+      y los de 15 (ambos) con "FizzBuzz". La clave es verificar el caso <code>% 15</code>
+      primero, porque si verificaras <code>% 3</code> antes, capturaría también los múltiplos de 15.</p>
+    </div>
 
- <div class="quiz-card" id="quiz4">
- <div class="quiz-badge"> Mini Reto</div>
- <div class="quiz-q">¿Cuántas veces se imprime "hola" con este código?<br><br>
- <span style="font-family:var(--mono); color:var(--accent-bright); font-size:13px; line-height:2;">for i in range(2, 8):<br>&nbsp;&nbsp;&nbsp;&nbsp;if i % 2 != 0:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print("hola")</span>
- </div>
- <div class="quiz-opts">
- <div class="quiz-opt" onclick="answer(this, false, 'quiz4')"><div class="quiz-letter">A</div><span>6 veces</span></div>
- <div class="quiz-opt" onclick="answer(this, false, 'quiz4')"><div class="quiz-letter">B</div><span>2 veces</span></div>
- <div class="quiz-opt" onclick="answer(this, true, 'quiz4')"><div class="quiz-letter">C</div><span>3 veces</span></div>
- <div class="quiz-opt" onclick="answer(this, false, 'quiz4')"><div class="quiz-letter">D</div><span>4 veces</span></div>
- </div>
- <div class="quiz-fb" id="quiz4-fb"></div>
- </div>
+    <div class="quiz-card" id="quiz4">
+      <div class="quiz-badge"> Mini Reto</div>
+      <div class="quiz-q">¿Cuántas veces se imprime "hola" con este código?<br><br>
+        <span style="font-family:var(--mono); color:var(--accent-bright); font-size:13px; line-height:2;">for i in range(2, 8):<br>&nbsp;&nbsp;&nbsp;&nbsp;if i % 2 != 0:<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print("hola")</span>
+      </div>
+      <div class="quiz-opts">
+        <div class="quiz-opt" onclick="answer(this, false, 'quiz4')"><div class="quiz-letter">A</div><span>6 veces</span></div>
+        <div class="quiz-opt" onclick="answer(this, false, 'quiz4')"><div class="quiz-letter">B</div><span>2 veces</span></div>
+        <div class="quiz-opt" onclick="answer(this, true, 'quiz4')"><div class="quiz-letter">C</div><span>3 veces</span></div>
+        <div class="quiz-opt" onclick="answer(this, false, 'quiz4')"><div class="quiz-letter">D</div><span>4 veces</span></div>
+      </div>
+      <div class="quiz-fb" id="quiz4-fb"></div>
+    </div>
 
- </section>
+  </section>
 
 </div>
 
 <div class="score-bar">
- <span> Puntos:</span>
- <span class="score-val" id="score-val">0</span>
+  <span> Puntos:</span>
+  <span class="score-val" id="score-val">0</span>
 </div>
 
 <script>
- const CSRF = '{{ csrf_token }}';
- let score = 0;
- let progressSteps = 0;
- const TOTAL_STEPS = 12;
+  const CSRF = '{{ csrf_token }}';
+  let score = 0;
+  let progressSteps = 0;
+  const TOTAL_STEPS = 12;
 
- function showSection(name, btn) {
- document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
- document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
- document.getElementById('sec-' + name).classList.add('active');
- btn.classList.add('active');
- }
+  function showSection(name, btn) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('sec-' + name).classList.add('active');
+    btn.classList.add('active');
+  }
 
- async function runCode(btn) {
- const playground = btn.closest('.playground');
- const code = playground.querySelector('.code-area').value;
- const outputArea = playground.querySelector('.output-area');
- const outputText = playground.querySelector('.output-text');
+  async function runCode(btn) {
+    const playground = btn.closest('.playground');
+    const code = playground.querySelector('.code-area').value;
+    const outputArea = playground.querySelector('.output-area');
+    const outputText = playground.querySelector('.output-text');
 
- btn.classList.add('loading');
- btn.textContent = ' Ejecutando';
+    btn.classList.add('loading');
+    btn.textContent = ' Ejecutando…';
 
- try {
- const res = await fetch('/run/', {
- method: 'POST',
- headers: { 'Content-Type': 'application/json', 'X-CSRFToken': CSRF },
- body: JSON.stringify({ code })
- });
- const data = await res.json();
- outputArea.classList.add('show');
- outputText.textContent = data.output || data.error || '(sin salida)';
- outputText.classList.toggle('error', !!data.error);
- addProgress();
- } catch(e) {
- outputArea.classList.add('show');
- outputText.textContent = ' Error de conexión con el servidor Django. ¿Está corriendo?';
- outputText.classList.add('error');
- }
+    try {
+      const res = await fetch('/run/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'X-CSRFToken': CSRF },
+        body: JSON.stringify({ code })
+      });
+      const data = await res.json();
+      outputArea.classList.add('show');
+      outputText.textContent = data.output || data.error || '(sin salida)';
+      outputText.classList.toggle('error', !!data.error);
+      addProgress();
+    } catch(e) {
+      outputArea.classList.add('show');
+      outputText.textContent = ' Error de conexión con el servidor Django. ¿Está corriendo?';
+      outputText.classList.add('error');
+    }
 
- btn.classList.remove('loading');
- btn.textContent = '▶ Ejecutar';
- }
+    btn.classList.remove('loading');
+    btn.textContent = '▶ Ejecutar';
+  }
 
- function answer(el, correct, quizId) {
- const quiz = document.getElementById(quizId);
- if (quiz.dataset.answered) return;
- quiz.dataset.answered = '1';
- quiz.querySelectorAll('.quiz-opt').forEach(o => o.style.pointerEvents = 'none');
- el.classList.add(correct ? 'correct' : 'wrong');
- const fb = document.getElementById(quizId + '-fb');
- fb.classList.add('show');
- if (correct) {
- fb.classList.add('ok');
- fb.innerHTML = ' ¡Correcto! +10 puntos';
- addScore(10);
- } else {
- fb.classList.add('fail');
- fb.innerHTML = ' No exactamente. Intenta analizar el código paso a paso.';
- }
- addProgress();
- }
+  function answer(el, correct, quizId) {
+    const quiz = document.getElementById(quizId);
+    if (quiz.dataset.answered) return;
+    quiz.dataset.answered = '1';
+    quiz.querySelectorAll('.quiz-opt').forEach(o => o.style.pointerEvents = 'none');
+    el.classList.add(correct ? 'correct' : 'wrong');
+    const fb = document.getElementById(quizId + '-fb');
+    fb.classList.add('show');
+    if (correct) {
+      fb.classList.add('ok');
+      fb.innerHTML = ' ¡Correcto! +10 puntos';
+      addScore(10);
+    } else {
+      fb.classList.add('fail');
+      fb.innerHTML = ' No exactamente. Intenta analizar el código paso a paso.';
+    }
+    addProgress();
+  }
 
- function addScore(n) {
- score += n;
- const el = document.getElementById('score-val');
- el.textContent = score;
- el.style.transform = 'scale(1.5)';
- el.style.color = '#fdcb6e';
- setTimeout(() => { el.style.transform = 'scale(1)'; el.style.color = ''; }, 350);
- }
+  function addScore(n) {
+    score += n;
+    const el = document.getElementById('score-val');
+    el.textContent = score;
+    el.style.transform = 'scale(1.5)';
+    el.style.color = '#fdcb6e';
+    setTimeout(() => { el.style.transform = 'scale(1)'; el.style.color = ''; }, 350);
+  }
 
- function addProgress() {
- progressSteps = Math.min(progressSteps + 1, TOTAL_STEPS);
- const pct = Math.round((progressSteps / TOTAL_STEPS) * 100);
- document.getElementById('progress-fill').style.width = pct + '%';
- document.getElementById('progress-pct').textContent = pct + '%';
- }
+  function addProgress() {
+    progressSteps = Math.min(progressSteps + 1, TOTAL_STEPS);
+    const pct = Math.round((progressSteps / TOTAL_STEPS) * 100);
+    document.getElementById('progress-fill').style.width = pct + '%';
+    document.getElementById('progress-pct').textContent = pct + '%';
+  }
 
- const typeInfo = {
- str: ' <strong>string (str)</strong> — Texto entre comillas. Inmutable. Soporta slicing, concatenación con +, repetición con *, métodos como .upper(), .split(), .replace()...',
- int: ' <strong>int</strong> — Entero de precisión arbitraria. Sin límite de tamaño. Soporta operaciones aritméticas exactas. True == 1 y False == 0 también son int.',
- float: ' <strong>float</strong> — Coma flotante IEEE-754 de 64 bits. ~15 dígitos de precisión. Cuidado: 0.1 + 0.2 ≠ 0.3 exactamente (error de representación binaria).',
- bool: ' <strong>bool</strong> — Subclase de int. Solo True o False. Generados por comparaciones: ==, !=, <, >. Usados en if, while, and, or, not.',
- };
+  const typeInfo = {
+    str:   ' <strong>string (str)</strong> — Texto entre comillas. Inmutable. Soporta slicing, concatenación con +, repetición con *, métodos como .upper(), .split(), .replace()...',
+    int:   ' <strong>int</strong> — Entero de precisión arbitraria. Sin límite de tamaño. Soporta operaciones aritméticas exactas. True == 1 y False == 0 también son int.',
+    float: ' <strong>float</strong> — Coma flotante IEEE-754 de 64 bits. ~15 dígitos de precisión. Cuidado: 0.1 + 0.2 ≠ 0.3 exactamente (error de representación binaria).',
+    bool:  ' <strong>bool</strong> — Subclase de int. Solo True o False. Generados por comparaciones: ==, !=, <, >. Usados en if, while, and, or, not.',
+  };
 
- function showVarInfo(type, msg) {
- const el = document.getElementById('var-info');
- el.innerHTML = msg || typeInfo[type];
- el.classList.add('show');
- }
+  function showVarInfo(type, msg) {
+    const el = document.getElementById('var-info');
+    el.innerHTML = msg || typeInfo[type];
+    el.classList.add('show');
+  }
 
- function addVar() {
- const nameEl = document.getElementById('new-var-name');
- const valEl = document.getElementById('new-var-val');
- const name = nameEl.value.trim();
- const val = valEl.value.trim();
- if (!name || !val) return;
+  function addVar() {
+    const nameEl = document.getElementById('new-var-name');
+    const valEl  = document.getElementById('new-var-val');
+    const name   = nameEl.value.trim();
+    const val    = valEl.value.trim();
+    if (!name || !val) return;
 
- let type = 'str', cls = 'v-str', pillCls = 't-str', display = `"${val}"`;
- if (val === 'True' || val === 'False') {
- type = 'bool'; cls = 'v-bool'; pillCls = 't-bool'; display = val;
- } else if (!isNaN(val) && val !== '') {
- if (val.includes('.')) { type = 'float'; cls = 'v-float'; pillCls = 't-float'; display = val; }
- else { type = 'int'; cls = 'v-int'; pillCls = 't-int'; display = val; }
- }
+    let type = 'str', cls = 'v-str', pillCls = 't-str', display = `"${val}"`;
+    if (val === 'True' || val === 'False') {
+      type = 'bool'; cls = 'v-bool'; pillCls = 't-bool'; display = val;
+    } else if (!isNaN(val) && val !== '') {
+      if (val.includes('.')) { type = 'float'; cls = 'v-float'; pillCls = 't-float'; display = val; }
+      else { type = 'int'; cls = 'v-int'; pillCls = 't-int'; display = val; }
+    }
 
- const box = document.createElement('div');
- box.className = 'var-box';
- box.style.animation = 'slideIn .3s ease';
- box.setAttribute('onclick', `showVarInfo('${type}', null)`);
- box.innerHTML = `
- <div class="var-box-name">${name} <span class="type-pill ${pillCls}">${type}</span></div>
- <div class="var-val ${cls}">${display}</div>`;
- document.getElementById('var-grid').appendChild(box);
- nameEl.value = ''; valEl.value = '';
- addScore(5); addProgress();
- }
+    const box = document.createElement('div');
+    box.className = 'var-box';
+    box.style.animation = 'slideIn .3s ease';
+    box.setAttribute('onclick', `showVarInfo('${type}', null)`);
+    box.innerHTML = `
+      <div class="var-box-name">${name} <span class="type-pill ${pillCls}">${type}</span></div>
+      <div class="var-val ${cls}">${display}</div>`;
+    document.getElementById('var-grid').appendChild(box);
+    nameEl.value = ''; valEl.value = '';
+    addScore(5); addProgress();
+  }
 
- function animateLoop() {
- const start = parseInt(document.getElementById('loop-start').value) || 0;
- const end = parseInt(document.getElementById('loop-end').value) || 5;
- if (end <= start || end - start > 20) {
- document.getElementById('loop-status').textContent = 'Rango inválido (máximo 20 pasos, fin > inicio).';
- return;
- }
+  function animateLoop() {
+    const start = parseInt(document.getElementById('loop-start').value) || 0;
+    const end   = parseInt(document.getElementById('loop-end').value) || 5;
+    if (end <= start || end - start > 20) {
+      document.getElementById('loop-status').textContent = 'Rango inválido (máximo 20 pasos, fin > inicio).';
+      return;
+    }
 
- const track = document.getElementById('loop-track');
- const status = document.getElementById('loop-status');
- track.innerHTML = '';
+    const track = document.getElementById('loop-track');
+    const status = document.getElementById('loop-status');
+    track.innerHTML = '';
 
- const steps = [];
- for (let i = start; i < end; i++) {
- const box = document.createElement('div');
- box.className = 'loop-step';
- box.textContent = i;
- track.appendChild(box);
- steps.push(box);
- }
+    const steps = [];
+    for (let i = start; i < end; i++) {
+      const box = document.createElement('div');
+      box.className = 'loop-step';
+      box.textContent = i;
+      track.appendChild(box);
+      steps.push(box);
+    }
 
- status.textContent = `for i in range(${start}, ${end}): — ${steps.length} iteraciones`;
- let idx = 0;
+    status.textContent = `for i in range(${start}, ${end}): — ${steps.length} iteraciones`;
+    let idx = 0;
 
- function tick() {
- if (idx > 0) steps[idx - 1].classList.replace('active', 'done');
- if (idx >= steps.length) {
- status.textContent = ` Ciclo completado — ${steps.length} iteraciones ejecutadas.`;
- return;
- }
- steps[idx].classList.add('active');
- status.textContent = `Iteración ${idx + 1}/${steps.length} — i = ${start + idx}`;
- idx++;
- setTimeout(tick, 500);
- }
- tick();
- addProgress();
- }
+    function tick() {
+      if (idx > 0) steps[idx - 1].classList.replace('active', 'done');
+      if (idx >= steps.length) {
+        status.textContent = ` Ciclo completado — ${steps.length} iteraciones ejecutadas.`;
+        return;
+      }
+      steps[idx].classList.add('active');
+      status.textContent = `Iteración ${idx + 1}/${steps.length} — i = ${start + idx}`;
+      idx++;
+      setTimeout(tick, 500);
+    }
+    tick();
+    addProgress();
+  }
 
- document.querySelectorAll('.code-area').forEach(ta => {
- ta.addEventListener('keydown', e => {
- if (e.key === 'Tab') {
- e.preventDefault();
- const s = ta.selectionStart;
- ta.value = ta.value.substring(0, s) + ' ' + ta.value.substring(ta.selectionEnd);
- ta.selectionStart = ta.selectionEnd = s + 4;
- }
- });
- });
+  document.querySelectorAll('.code-area').forEach(ta => {
+    ta.addEventListener('keydown', e => {
+      if (e.key === 'Tab') {
+        e.preventDefault();
+        const s = ta.selectionStart;
+        ta.value = ta.value.substring(0, s) + '    ' + ta.value.substring(ta.selectionEnd);
+        ta.selectionStart = ta.selectionEnd = s + 4;
+      }
+    });
+  });
 </script>
 
 </body>
